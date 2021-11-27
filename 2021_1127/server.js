@@ -23,8 +23,9 @@ app.get("/this-is-a-book" , (req,res)=>{
 
 ////////////////////////////////////////////////////////////
 // 帶參數
-// 1. query_string
-// 2. parameters
+// 1. query_string     -> ex: /data?name=jeff&age=18
+// 2. parameters       -> ex: /department/1234/members/10002
+//                     (server 端： /department/:depNo/members/:memNo)
 // 3. body (in future)
 
 app.get("/data",(req,res)=>{
