@@ -108,7 +108,7 @@ app.get("/response-data",(req,res)=>{
     // console.log(__dirname);
     // console.log(fileName);
  
-    res.sendFile(fileName);
+    res.sendFile(fileName); 
 
     /////////////////////
 
