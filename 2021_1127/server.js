@@ -72,7 +72,7 @@ app.get("/department/:depNo/members/:memNo" , (req,res)=>{
 
 ////////////////////////////////////////////////////////////
 // response 資料回覆
-app.get("/response-data",(req,res)=>{
+app.get("/response-data/:imgNo",(req,res)=>{
 
     // 1. .send --> 回傳文字資料
     // res.send("嗨嗨, 我是文字資料～～～");
@@ -98,16 +98,18 @@ app.get("/response-data",(req,res)=>{
     // let fileName = "./demo-1.jpeg";  // 不可用 相對路徑
 
     // path --> node.js 原生路徑套件
-    // __dirname --> 程式執行位置
+    // __dirname --> 保留字, 程式執行位置
 
     // [Question] 使用 type 帶參數, 抽換 梗圖 照片
-    let imgType = req.query.type;
+    // let imgType = req.query.type;
+    let imgType = req.params.imgNo;
     let imgName = "demo-" + imgType + ".jpeg";
     console.log(imgName);
 
     let fileName = path.join(__dirname,imgName);  // 使用 絕對路徑
-    // console.log(__dirname);
-    // console.log(fileName);
+    console.log("__dirname :",__dirname);
+    console.log("imgName :",imgName);
+    console.log("fileName :",fileName);
  
     res.sendFile(fileName); 
 
