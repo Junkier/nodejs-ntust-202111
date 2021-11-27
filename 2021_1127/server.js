@@ -98,7 +98,7 @@ app.get("/response-data",(req,res)=>{
     let fileName = path.join(__dirname,"demo-1.jpeg");  // 使用 絕對路徑
     console.log(__dirname);
     console.log(fileName);
-
+ 
     res.sendFile(fileName);
 
     // 使用 type 帶參數, 抽換 梗圖 照片
