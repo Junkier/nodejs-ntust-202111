@@ -17,3 +17,14 @@ console.log( sayHello("Jeff") );
 console.log( sayHello("Leo") );
 console.log( sayHello("Holy") );
 
+
+//  let main = ()=>{ 
+//    let a = -123; 
+//    if(a>0){ 
+//      var b = 456; 
+//    }else{ 
+//      var b = 789; const c = 0; 
+//    }; 
+//    console.log(a,b,c);
+//  } 
+//  main();
