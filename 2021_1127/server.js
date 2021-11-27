@@ -13,10 +13,15 @@ app.get("/testqq" ,(req,res)=>{
     res.send("嗨嗨 , 我是 /testqq 路徑");
 });
 
+// 讓 server.js 佔有 8088 的 port
 app.listen(8088,()=>{
     console.log("Server is running at localhost:8088");
+    console.log("嗨嗨 , 我是第一次看 Node.js 程式");
+    console.log("怎麼有點難ＱＱ");
 });
 
+// 程式執行後 , 進入 "等待" (Pending) 的狀態 
+// 等 使用者 連線進來 (發 requests 過來)
 
 
 ////////////////////////
