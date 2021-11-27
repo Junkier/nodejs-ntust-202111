@@ -40,7 +40,3 @@ console.log( time.getFullYear() );
 console.log( time.getMonth() );
 console.log( time.getMinutes() );
 
-
-/////////////////////////////////////////////
-
-console.log(__dirname);
