@@ -19,6 +19,33 @@ app.get("/this-is-a-book" , (req,res)=>{
 });
 
 
+////////////////////////////////////////////////////////////
+// 帶參數
+// 1. query_string
+// 2. parameters
+// 3. body 
+
+app.get("/data",(req,res)=>{
+    // req: requests 資料
+    // res: response 資料
+
+    // 取得 query_string 帶來的參數
+
+    // let name = req.query.name;
+    // console.log(name);
+    // res.send("嗨嗨 , " + name + " 您好～");
+
+    // 追加 age123 , message 參數處理
+    let name = req.query.name;
+    let age  = req.query.age123;
+    let message = req.query.message;
+    console.log(name,age,message);
+    res.send("嗨嗨, 您傳的參數為 :" + name + "/" + age + "/" + message);
+});
+
+
+
+
 // 讓 server.js 佔有 8088 的 port
 app.listen(8088,()=>{
     console.log("Server is running at localhost:8088");
