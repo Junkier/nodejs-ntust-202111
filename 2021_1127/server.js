@@ -1,7 +1,6 @@
-const express = require("express");
+const express = require("express");  // 引入套件
 const path    = require("path");
 const app = express();
-
 
 // 根路徑 
 app.get("/" , (req,res)=>{
@@ -26,7 +25,7 @@ app.get("/this-is-a-book" , (req,res)=>{
 // 帶參數
 // 1. query_string
 // 2. parameters
-// 3. body 
+// 3. body (in future)
 
 app.get("/data",(req,res)=>{
     // req: requests 資料
@@ -101,20 +100,20 @@ app.get("/response-data",(req,res)=>{
     // __dirname --> 程式執行位置
 
     // [Question] 使用 type 帶參數, 抽換 梗圖 照片
-    // let imgType = req.query.type;
-    // let imgName = "demo-" + imgType + ".jpeg";
-    // console.log(imgName);
+    let imgType = req.query.type;
+    let imgName = "demo-" + imgType + ".jpeg";
+    console.log(imgName);
 
-    // let fileName = path.join(__dirname,imgName);  // 使用 絕對路徑
-    // // console.log(__dirname);
-    // // console.log(fileName);
+    let fileName = path.join(__dirname,imgName);  // 使用 絕對路徑
+    // console.log(__dirname);
+    // console.log(fileName);
  
-    // res.sendFile(fileName);
+    res.sendFile(fileName);
 
     /////////////////////
 
     // 4. .redirect 轉址處理
-    res.redirect("https://youtube.com");
+    // res.redirect("https://youtube.com");
 
 });
 
