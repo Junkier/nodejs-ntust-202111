@@ -77,6 +77,8 @@ app.get("/response-data",(req,res)=>{
     // 1. .send --> 回傳文字資料
     // res.send("嗨嗨, 我是文字資料～～～");
 
+    /////////////////////
+
     // 2. .json --> 回傳 JSON 資料 (類似於 Object 資料型別)
     // res.json({ "name" : "jeff" , "age" : 18 , "message" : "嗨嗨～～～"});
 
@@ -90,19 +92,29 @@ app.get("/response-data",(req,res)=>{
     //     "message" : message
     // });
 
+    /////////////////////
+
     // 3. .sendFile --> 回傳 檔案 資料 (ex: 影像檔)
     // let fileName = "./demo-1.jpeg";  // 不可用 相對路徑
 
     // path --> node.js 原生路徑套件
     // __dirname --> 程式執行位置
-    let fileName = path.join(__dirname,"demo-1.jpeg");  // 使用 絕對路徑
-    console.log(__dirname);
-    console.log(fileName);
+
+    // [Question] 使用 type 帶參數, 抽換 梗圖 照片
+    // let imgType = req.query.type;
+    // let imgName = "demo-" + imgType + ".jpeg";
+    // console.log(imgName);
+
+    // let fileName = path.join(__dirname,imgName);  // 使用 絕對路徑
+    // // console.log(__dirname);
+    // // console.log(fileName);
  
-    res.sendFile(fileName);
+    // res.sendFile(fileName);
 
-    // 使用 type 帶參數, 抽換 梗圖 照片
+    /////////////////////
 
+    // 4. .redirect 轉址處理
+    res.redirect("https://youtube.com");
 
 });
 
