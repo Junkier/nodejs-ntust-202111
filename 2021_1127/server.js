@@ -41,9 +41,26 @@ app.get("/data",(req,res)=>{
     let message = req.query.message;
     console.log(name,age,message);
     res.send("嗨嗨, 您傳的參數為 :" + name + "/" + age + "/" + message);
+    // res.send("我是第二個 res.send !!!!");
+    // "嗨嗨" --> 字串資料
+    // 字串 + 字串 --> 字串合併
+    // "嗨嗨" + "我是 Jeff 老師" --> "嗨嗨我是 Jeff 老師"
 });
 
+// 取得 parameters 帶來的參數
+// "/department/A101/members/10003"
+app.get("/department/:depNo/members/:memNo" , (req,res)=>{
+    let depNo = req.params.depNo;
+    let memNo = req.params.memNo;
 
+    let message = "部門:" + depNo + " ," + "會員編號: " + memNo;
+    console.log(message);
+    res.send(message);
+});
+
+// app.post 
+// app.put
+// app.delete 
 
 
 // 讓 server.js 佔有 8088 的 port
