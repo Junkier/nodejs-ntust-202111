@@ -1,4 +1,5 @@
 const express = require("express");
+const path    = require("path");
 const app = express();
 
 
@@ -81,13 +82,27 @@ app.get("/response-data",(req,res)=>{
 
     // 從 瀏覽器 傳 name 參數 (query_string), 組合成 message 
     // 再回傳 JSON 給 瀏覽器 (前端)
-    let name = req.query.name;
-    let message = "嗨嗨 , 我是" + name;
-    res.json({
-        "name" : "jeff",
-        "age"  : 18 ,
-        "message" : message
-    });
+    // let name = req.query.name;
+    // let message = "嗨嗨 , 我是" + name;
+    // res.json({
+    //     "name" : "jeff",
+    //     "age"  : 18 ,
+    //     "message" : message
+    // });
+
+    // 3. .sendFile --> 回傳 檔案 資料 (ex: 影像檔)
+    // let fileName = "./demo-1.jpeg";  // 不可用 相對路徑
+
+    // path --> node.js 原生路徑套件
+    // __dirname --> 程式執行位置
+    let fileName = path.join(__dirname,"demo-1.jpeg");  // 使用 絕對路徑
+    console.log(__dirname);
+    console.log(fileName);
+
+    res.sendFile(fileName);
+
+    // 使用 type 帶參數, 抽換 梗圖 照片
+
 
 });
 
