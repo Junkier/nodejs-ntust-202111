@@ -92,5 +92,31 @@ console.log("Array 長度: ",arr4.length);  // array 內建的 「屬性」 (pro
 // .map / .filter
 let arr5 = [1,2,3,4,5];
 
-let map1 = arr5.map(n => n*2);
+let map1 = arr5.map(n => n*2);   // 將每個元素 x2 
+let map2 = arr5.map(n => n**3);  // 將每個元素 3 次方
+
 console.log("map1 :",map1);
+console.log("map2 :",map2);
+
+let filter1 = arr5.filter(n=>n>3);       // 抓出 n>3 的元素
+let filter2 = arr5.filter(n=> n%2 === 0) // 抓出 對2取餘數為0 的元素 (抓出偶數)
+
+console.log("filter1 :",filter1);
+console.log("filter2 :",filter2);
+
+// 數字放大 3倍 , 再-1 , 抓出奇數值 
+let map3 = arr5.map(n => n*3);
+console.log("map3 :",map3);
+
+let map4 = map3.map(n => n-1);
+console.log("map4 :",map4);
+
+let filter3 = map4.filter(n => n%2 === 1) // 抓出奇數
+console.log("filter3 :",filter3);
+
+// 組合動作 (function chain)
+let result1 = arr5.map(n=>n*3)
+                  .map(n=>n-1)
+                  .filter(n => n%2 ===1 );
+
+console.log("result1 :",result1);
