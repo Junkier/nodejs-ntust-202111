@@ -160,11 +160,12 @@ console.log(obj4);
 obj4["movies"] = "Avengers !!!";
 console.log(obj4);
 
-// Object.keys() / Object.values()
+// Object.keys() / Object.values() 
+// Object 為 保留字 
 console.log("Object.keys(obj4) :",Object.keys(obj4));
-console.log("Object.values(obj4) :",Object.values(obj4));
+console.log( "Object.values(obj4) :" , Object.values(obj4) );
 
-console.log("-".repeat(50));
+console.log( "-".repeat(50) );
 
 ////// 小試身手 #1
 // a.
@@ -221,6 +222,8 @@ let result5 = data3.filter( element => element["money"] >= 900) // 過濾 money 
                    
 console.log("result5 :",result5); 
 
+console.log( "-".repeat(50) );
+
 ////// 小試身手 #2
 let studentsScores = [
     { name : "Jeff"  , age : 18 , scores : [95,88,100] },
@@ -232,8 +235,17 @@ let studentsScores = [
 ];
 
 // 1) 取得 age >= 30 的人名 array  --> [ "Keven" , "Elle" ]
+let result6 = studentsScores.filter(element => element["age"] >=30 )
+                            .map(element => element["name"]);
+console.log("result6 :" , result6);
 
 // 2) 取得 scores 總和 >= 250 的 資料 , 並將人名 & 年紀合併成一字串 , 成為 array 元素後回傳
 //    --> [ 'Jeff-18', 'Leo-22', 'Elle-31' ]
+
+let result7 = studentsScores.filter(ele=> (ele["scores"][0] + ele["scores"][1] + ele["scores"][2]) >=250 )
+                            .map(ele=> (ele["name"] + "-" + ele["age"]));
+
+console.log("result7 :", result7);
+
 
 
