@@ -98,8 +98,8 @@ let map2 = arr5.map(n => n**3);  // 將每個元素 3 次方
 console.log("map1 :",map1);
 console.log("map2 :",map2);
 
-let filter1 = arr5.filter(n=>n>3);       // 抓出 n>3 的元素
-let filter2 = arr5.filter(n=> n%2 === 0) // 抓出 對2取餘數為0 的元素 (抓出偶數)
+let filter1 = arr5.filter(n=>n>3);        // 抓出 n>3 的元素
+let filter2 = arr5.filter(n=> n%2 === 0); // 抓出 對2取餘數為0 的元素 (抓出偶數)
 
 console.log("filter1 :",filter1);
 console.log("filter2 :",filter2);
@@ -111,12 +111,56 @@ console.log("map3 :",map3);
 let map4 = map3.map(n => n-1);
 console.log("map4 :",map4);
 
-let filter3 = map4.filter(n => n%2 === 1) // 抓出奇數
+let filter3 = map4.filter(n => n%2 === 1); // 抓出奇數
 console.log("filter3 :",filter3);
 
 // 組合動作 (function chain)
-let result1 = arr5.map(n=>n*3)
+let result1 = arr5.map(n=>n*3) 
                   .map(n=>n-1)
                   .filter(n => n%2 ===1 );
 
 console.log("result1 :",result1);
+
+console.log("-".repeat(50));
+
+///////////////////////////////////////////////////////////////////////////
+// Object 物件資料
+let obj4 = {
+   "name" : "Jeff" ,   // key-value pair , key 要為字串
+   "age"  : 18 ,
+   message : "嗨嗨" ,
+   today   : "禮拜六"
+};
+
+console.log(obj4);
+
+// 取值
+let name2 = obj4["name"];
+let age2  = obj4["age"];
+let day = obj4["today"];   // 抓 key 為 "today" 的 value 
+
+let today = "age";         // 宣告 today 為 "age" 字串
+let today2 = obj4[today];  // 如同抓 obj4["age"] 的 value 
+
+console.log("name :", name2);
+console.log("age :" , age2);
+console.log("today :", day);
+console.log("today2 :", today2);  // 抓到 obj4["age"] 的 value 
+
+// 修改值
+obj4["name"] = "Keven"   // 修改 name 的 value 為 Keven
+obj4["age"]  = 30        // 修改 age 的 value 為 30
+console.log(obj4);
+    
+// 新增值
+obj4["scores"] = [95,100,77];  // 直接新增 key-value pairs
+obj4["movies"] = "Spider Man";
+console.log(obj4);
+
+obj4["movies"] = "Avengers !!!";
+console.log(obj4);
+
+
+// Object.keys() / Object.values()
+console.log("Object.keys(obj4) :",Object.keys(obj4));
+console.log("Object.values(obj4) :",Object.values(obj4));
