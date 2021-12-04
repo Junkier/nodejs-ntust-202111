@@ -78,7 +78,7 @@ arr4[1] = -20;    // index=1 修改為 -20
 console.log(arr4);
 
 // 新增值 -> 使用 .push
-arr4.push(27);   // array 內建的 「方法」
+arr4.push(27);   // array 內建的 「方法」 (method)
 arr4.push(31);
 arr4.push(99);
 arr4.push(87);
@@ -87,4 +87,10 @@ arr4.push(78);
 console.log(arr4);
 
 // 取得 array 的長度 (元素個數)
-console.log("Array 長度: ",arr4.length);  // array 內建的 「屬性」
+console.log("Array 長度: ",arr4.length);  // array 內建的 「屬性」 (property)
+
+// .map / .filter
+let arr5 = [1,2,3,4,5];
+
+let map1 = arr5.map(n => n*2);
+console.log("map1 :",map1);
