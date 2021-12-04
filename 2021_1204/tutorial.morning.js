@@ -160,7 +160,34 @@ console.log(obj4);
 obj4["movies"] = "Avengers !!!";
 console.log(obj4);
 
-
 // Object.keys() / Object.values()
 console.log("Object.keys(obj4) :",Object.keys(obj4));
 console.log("Object.values(obj4) :",Object.values(obj4));
+
+console.log("-".repeat(50));
+
+////// 小試身手 #1
+// a.
+let data = {
+  name : "Jeff",
+  height : 170,
+  weight : 65,
+  age : 26 ,
+  class : "A-",
+  interest : ["喝酒","爬山","寫程式"]
+};
+console.log(data);
+
+// b. 
+let message = "嗨嗨 , 我是" + data["name"] + ", 階級為" + data["class"];
+console.log(message);
+
+// c. 
+data["height"] = 180;
+let message2 = "修改 " + data["name"] + " 的身高為 " + data["height"];
+console.log(message2);
+
+// d. 
+// data["interest"] // 此時該變數為  ["喝酒","爬山","寫程式"] array 資料
+data["interest"].push("彈吉他");
+console.log(data);
