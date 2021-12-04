@@ -191,3 +191,49 @@ console.log(message2);
 // data["interest"] // 此時該變數為  ["喝酒","爬山","寫程式"] array 資料
 data["interest"].push("彈吉他");
 console.log(data);
+
+console.log("-".repeat(50));
+
+/////////////////////////////////////////////////////////////
+// Array with Object
+let data3 = [
+  { memNo : 1001 , name : "Jeff"  , money : 1000 },
+  { memNo : 1002 , name : "Leo"   , money : 2000 },
+  { memNo : 1003 , name : "Keven" , money : 950  },
+  { memNo : 1004 , name : "Holy"  , money : 470  },
+  { memNo : 1005 , name : "Jenny" , money : 890  },
+];
+
+// a) 取出 名字資料的 Array --> ["Jeff","Leo","Keven","Holy","Jenny"]
+let result2 = data3.map( element => element["name"] );
+console.log("result2 :",result2);
+
+// b) 取出 memNo 構成的 Array --> [1001,1002,1003,1004,1005]
+let result3 = data3.map( ele => ele["memNo"] );
+console.log("result3 :",result3);
+
+let result4 = data3.map( element => "ABCD");
+console.log("result4 :",result4);
+
+// c) money >= 900 的 memNo , 所構成的 Array 
+let result5 = data3.filter( element => element["money"] >= 900) // 過濾 money >= 900 的 object
+                   .map(element => element["memNo"]);           // 將 object 轉成 memNo 的資料
+                   
+console.log("result5 :",result5); 
+
+////// 小試身手 #2
+let studentsScores = [
+    { name : "Jeff"  , age : 18 , scores : [95,88,100] },
+    { name : "Leo"   , age : 22 , scores : [90,97,98]  },
+    { name : "Holy"  , age : 25 , scores : [75,68,90]  },
+    { name : "Keven" , age : 33 , scores : [77,65,32]  },
+    { name : "Jenny" , age : 20 , scores : [63,82,91]  },
+    { name : "Elle"  , age : 31 , scores : [100,73,83] },
+];
+
+// 1) 取得 age >= 30 的人名 array  --> [ "Keven" , "Elle" ]
+
+// 2) 取得 scores 總和 >= 250 的 資料 , 並將人名 & 年紀合併成一字串 , 成為 array 元素後回傳
+//    --> [ 'Jeff-18', 'Leo-22', 'Elle-31' ]
+
+
