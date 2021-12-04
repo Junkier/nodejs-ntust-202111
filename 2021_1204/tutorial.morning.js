@@ -23,9 +23,33 @@ console.log("-".repeat(50));
 
 // Array , 陣列資料
 let arr1 = [1,2,3,4,5];
+let arr2 = ["jeff","leo","keven"];
+let arr3 = [3.1415, "Jeff老師" , true , { "message" : "嗨嗨"} ];  // 每一個資料稱為 -> 元素 element
+
 console.log(arr1);
+console.log(arr2);
+console.log(arr3);
 
 // Object , 物件資料
 let obj1 = { "name" : "jeff" , "age" : 18 };
+let obj2 = {
+  "name2" : "Leo",   //  key-value pair
+  "age2"  : 22,      //  pair pair 之間 , 以 ',' 做為分隔
+  "other2" : [1,2,3,4,5],
+  "message2" : {
+    "math_score" : 100,
+    "eng_score"  : 95
+  }
+};
 console.log(obj1);
+console.log(obj2);
+
+// null
+let data1 = null;
+console.log(data1);
+
+// undefined
+let data2;
+console.log(data2);
+
 
