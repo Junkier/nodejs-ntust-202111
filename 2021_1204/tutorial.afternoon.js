@@ -138,3 +138,44 @@ let test4 = ()=>{
 };
 
 test4();
+
+
+console.log("-".repeat(50));
+/////////////////////////////////////////////////////////////
+//// 流程控制#1 if-else 
+// 1. 宣告 a 變數
+// a>0 --> 正數！！！
+// a<0 --> 負數！！！
+let a = 0;
+if( a>0 ){
+  console.log("正數！！！");
+} else {
+  console.log("負數！！！");
+};
+
+// 2. 宣告 b 變數
+// b > 0   --> 正數！！！
+// b === 0 --> b為0！！！
+// b < 0   --> 負數！！！
+let b = -123;
+if(b > 0 ){
+  console.log("b 為 正數！！！");
+} else if( b === 0){
+  console.log("b 為 0！！！");
+} else {
+  console.log("b 為 負數！！！");
+};
+
+////// 運算子 (資料間運算的符號)
+// 算數運算子: + , - , * , / , % (取餘數)
+console.log( 12 / 5);
+console.log( 12 % 5);
+console.log( 12 % 2);
+console.log( 113 % 2);
+
+// 比較運算子: > , < , == , === , != , !==
+console.log( 3> 12 );  // 請問 3> 12 嗎？  V -> true ; X -> false
+console.log( 27 < 30 );
+console.log( 12%2 === 0);
+console.log( 113%2 !== 0);
+
