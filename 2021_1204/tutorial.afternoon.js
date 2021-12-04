@@ -160,7 +160,7 @@ if( a>0 ){
 let b = -123;
 if(b > 0 ){
   console.log("b 為 正數！！！");
-} else if( b === 0){
+} else if( b === 0 ){
   console.log("b 為 0！！！");
 } else {
   console.log("b 為 負數！！！");
@@ -176,6 +176,47 @@ console.log( 113 % 2);
 // 比較運算子: > , < , == , === , != , !==
 console.log( 3> 12 );  // 請問 3> 12 嗎？  V -> true ; X -> false
 console.log( 27 < 30 );
-console.log( 12%2 === 0);
-console.log( 113%2 !== 0);
+console.log( 12%2 === 0);   // 左右兩邊值 是否 相等
+console.log( 113%2 !== 0);  // 左右兩邊值 是否 不相等
 
+console.log("-".repeat(50));
+
+// == / === 差別
+// ==  : 弱型別 比較
+// === : 強型別 比較
+console.log("1 == 1 :"   , 1 == 1);
+console.log('1 == "1" :' , 1 == "1");
+console.log("1 == true :", 1 == true);
+
+console.log("1 === 1 :"   , 1 === 1);
+console.log('1 === "1" :' , 1 === "1");
+console.log("1 === true :", 1 === true);
+
+console.log("-".repeat(50));
+
+
+// 關係運算子: && , ||
+//  && -> 交集 , 且 (and)
+//  || -> 聯集 , 或 (or)
+console.log("12%2 === 0 && 3>7 :", 12%2 === 0 && 3>7 );
+console.log("12%2 === 0 && 3>-2 :", 12%2 === 0 && 3>-2 );
+
+console.log("-".repeat(50));
+
+/////// 小試身手# 3-1
+// 用 number 來決定 type 組別
+let number = -100;
+let type;
+
+// if - else ...
+if(number >= 100) {
+  type = "丁組";
+} else if (number >= 50 && number < 100) {
+  type = "丙組";
+} else if (number >=0 && number <50) {
+  type = "乙組";
+} else {
+  type = "甲組";
+};
+
+console.log("您的組別是 :" , type);
