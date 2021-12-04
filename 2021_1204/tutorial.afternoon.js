@@ -203,7 +203,7 @@ console.log("12%2 === 0 && 3>-2 :", 12%2 === 0 && 3>-2 );
 
 console.log("-".repeat(50));
 
-/////// 小試身手# 3-1
+/////// 小試身手 #3-1
 // 用 number 來決定 type 組別
 let number = -100;
 let type;
@@ -220,3 +220,34 @@ if(number >= 100) {
 };
 
 console.log("您的組別是 :" , type);
+
+
+/////// 小試身手 #3-2
+// 透過 age / gender , 顯示對應的金額
+let age = 20;
+let gender = "M" ; // "M" , "F"
+let message3; 
+
+// 巢狀 if-else
+// if( gender === "F"){
+//   // 女生
+//   message3 = "您的消費金額為 $500";
+// } else {
+//   // 男生
+//   if( age >= 30){
+//     // 男生 && age >= 30 
+//     message3 = "您的消費金額為 $1000";
+//   }else{
+//     message3 = "您的消費金額為 $700";
+//   }
+// };
+
+if( gender === "F"){
+  message3 = "您的消費金額為 $500";
+} else if ( gender === "M" && age >=30){
+  message3 = "您的消費金額為 $1000";
+} else if ( gender === "M" && age < 30){
+  message3 = "您的消費金額為 $700";
+};
+
+console.log(message3);
