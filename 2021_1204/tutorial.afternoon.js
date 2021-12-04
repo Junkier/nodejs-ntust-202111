@@ -110,19 +110,27 @@ console.log("num3 :", num3);
 // var / let / const 差異
 // var   : function scope , 值可以任意改
 // let   : block scope    , 值可以任意改
-// const : block scope    , 值不可任意改
+// const : block scope    , 值不可任意改 (常數)
 console.log("-".repeat(50));
 
 let test4 = ()=>{
-  let num4 = 150;
-  var message ;
+  let num4 = 123;
+  // var message ;  // function scope
+  let message ;  // block scope
+  // const message = "";    // block scope  , 無法使用
 
   if(num4 >0){
-    message = "正數！！！";
     // console.log("正數！！！");
+    message = "正數！！！";
+    // var message = "正數！！！";      // function scope
+    // let message = "正數！！！";   // block scope , 只在 if scope 內有效
+    // const message = "正數！！！";
   }else{
-    message = "負數！！！";
     // console.log("負數！！！");
+    message = "負數！！！";
+    // var message = "負數！！！";     // function scope
+    // let message = "負數！！！";  // block scope , 只在 else scope 內有效
+    // const message = "負數！！！";
   };
 
   console.log(message);
