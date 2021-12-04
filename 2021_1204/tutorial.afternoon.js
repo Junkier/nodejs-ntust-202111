@@ -72,6 +72,61 @@ let map3 = arr3.map((n) => {
   return n*3;
 });
 
+// 簡寫法
 // let map3 = arr3.map( n => n*3 );
-
 console.log("map3 :" , map3);
+
+console.log( "-".repeat(50) );
+
+//// function 特性介紹#2
+// 全域 (Global) V.S 區域 (Local)
+let test1 = ()=>{
+  // num1 -> 區域變數
+  var num1 = 12;
+  return num1;
+};
+
+let test2 = ()=>{
+  // num2 -> 區域變數
+  let num2 = 15;
+  return num2;
+};
+
+let test3 = ()=>{
+  // num3 -> 全域變數
+  num3 = 18;
+  return num3;
+};
+
+console.log( test1() );
+console.log( test2() );
+console.log( test3() );
+
+console.log("num3 :", num3);
+// console.log("num2 :", num2);
+// console.log("num1 :", num1);
+
+//// function 特性介紹#3 
+// var / let / const 差異
+// var   : function scope , 值可以任意改
+// let   : block scope    , 值可以任意改
+// const : block scope    , 值不可任意改
+console.log("-".repeat(50));
+
+let test4 = ()=>{
+  let num4 = 150;
+  var message ;
+
+  if(num4 >0){
+    message = "正數！！！";
+    // console.log("正數！！！");
+  }else{
+    message = "負數！！！";
+    // console.log("負數！！！");
+  };
+
+  console.log(message);
+
+};
+
+test4();
