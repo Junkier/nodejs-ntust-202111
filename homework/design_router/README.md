@@ -12,7 +12,7 @@
         
     **2) introduction.js**
     - GET /introduction/page => 網頁顯示 "這是 introduction 頁面"
-    [ ] GET /introduction/data => 讀取 data.json 內的資料並回傳 , 結果為
+    - GET /introduction/data => 讀取 data.json 內的資料並回傳 , 結果為
     ```
         {
             result : [
