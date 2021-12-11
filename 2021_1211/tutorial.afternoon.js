@@ -226,6 +226,7 @@ let main2 = async ()=>{
     console.log(output);
   }catch(err){
     // 發生錯誤時, 執行區塊
+    console.log("我是 catch 錯誤區！");
     console.log(err);
   };
 };

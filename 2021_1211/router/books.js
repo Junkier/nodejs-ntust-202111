@@ -72,6 +72,65 @@ router.get("/multi-data" , (req,res)=>{
   });
 });
 
+let readFilePromise = (dataPath) => {
+  return new Promise( (resolve,reject) => {
+    fs.readFile(dataPath,"utf8",(err,data)=> {
+      if(err) reject(err);
+      else resolve(JSON.parse(data));
+    });
+  });
+};
+
+
+router.get("/multi-data-promise",(req,res)=>{
+  let result = {};
+  readFilePromise("./models/data1.json")
+    .then(data1=>{
+      result["data1"] = data1;
+      return readFilePromise("./models/data2.json");
+    })
+    .then(data2 =>{
+      result["data2"] = data2;
+      return readFilePromise("./models/data3.json");
+    })
+    .then(data3 =>{
+      result["data3"] = data3;
+      return readFilePromise("./models/data4.json");
+    })
+    .then(data4 =>{
+      result["data4"] = data4;
+      return readFilePromise("./models/data5.json");
+    })
+    .then(data5 =>{
+      result["data5"] = data5;
+      result["message"] = "我是用 Promise!!!";
+      res.json(result);
+    })
+    .catch(err=>{
+      res.send("檔案有問題！！！");
+    });
+});
+
+router.get("/multi-data-async", async (req,res)=>{
+  try {
+    let result = {};
+    let data1 = await readFilePromise("./models/data1.json");
+    let data2 = await readFilePromise("./models/data2.json");
+    let data3 = await readFilePromise("./models/data3.json");
+    let data4 = await readFilePromise("./models/data4.json");
+    let data5 = await readFilePromise("./models/data5.json");
+    result["data1"] = data1;
+    result["data2"] = data2;
+    result["data3"] = data3;
+    result["data4"] = data4;
+    result["data5"] = data5;
+    result["message"] = "我是 Async/Await 取得！！！";
+
+    res.json(result);
+  } catch(err){
+    res.send("檔案有問題！！！");
+  }
+});
 
 // [module][1] 將 router 導出 , 等著別人 require 引入使用
 module.exports = router;
