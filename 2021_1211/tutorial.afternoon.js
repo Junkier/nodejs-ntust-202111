@@ -2,7 +2,7 @@
 // 處理讀取檔案
 const fs = require("fs");
 
-// 1. 使用 readFileSync 
+//// 1. 使用 readFileSync 
 // let d1 = fs.readFileSync("models/data1.json","utf8");    // 同步 , 執行完才往下
 // console.log("d1 完成！！！");
 // let d2 = fs.readFileSync("models/data2.json","utf8");    // 同步 , 執行完才往下
@@ -15,7 +15,7 @@ const fs = require("fs");
 // console.log(JSON.parse(d3));
 
 ////////////////////////////////////////////////////////////////////////
-// 2. 使用 Promise 
+//// 2. 使用 Promise 
 // 1) 宣告 Promise 
 let readFilePromise = (dataPath)=>{
   return new Promise((resolve,reject)=>{
@@ -59,7 +59,8 @@ let flipCoin = ()=>{
   });
 };
 
-
+// 使用 .then / .catch 
+// 處理 "成功" / "失敗" 狀態
 // flipCoin()
 //   .then(result=>{
 //     console.log("我是 flipCoin 的 .then 區～");
@@ -70,6 +71,7 @@ let flipCoin = ()=>{
 //     console.log(err);
 //   });
 
+// .then 可多接幾段 , 並用 return 往下傳值
 flipCoin()
   .then(result=>{
     console.log("我是 flipCoin 的 .then 區～");
@@ -84,7 +86,7 @@ flipCoin()
     console.log("r3 :",r3);
     console.log("這是第三個！！！");
   })
-  .then(r=>{
+  .then(r4=>{
     console.log("這是第四個！！！");
   })
   .catch(err=>{
