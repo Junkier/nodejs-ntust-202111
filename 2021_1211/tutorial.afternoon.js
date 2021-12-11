@@ -179,7 +179,7 @@ let flipCoin = ()=>{
 //     console.log("失敗 ...",err);
 //   });
 
-// 使用 async / await
+// async / await 版
 let main = async () => {
   // 使用 try-catch 做錯誤處理
   try {
