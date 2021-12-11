@@ -46,18 +46,18 @@ console.log("-".repeat(50));
 
 //// Promise 特性
 // flipCoin function
-let flipCoin = ()=>{
-  return new Promise( (resolve,reject)=>{
-    // 延遲時間 執行 , 以毫秒 (ms) 為單位 
-    setTimeout(()=>{
-      if(Math.random() >0.2){
-        resolve("上課囉！！！");
-      }else{
-        reject("翹課 -.-");
-      }
-    } , 500);
-  });
-};
+// let flipCoin = ()=>{
+//   return new Promise( (resolve,reject)=>{
+//     // 延遲時間 執行 , 以毫秒 (ms) 為單位 
+//     setTimeout(()=>{
+//       if(Math.random() >0.2){
+//         resolve("上課囉！！！");
+//       }else{
+//         reject("翹課 -.-");
+//       }
+//     } , 500);
+//   });
+// };
 
 // 使用 .then / .catch 
 // 處理 "成功" / "失敗" 狀態
@@ -135,23 +135,62 @@ let flipCoin = ()=>{
 let output = {}; 
 
 // 使用 Promise 讀取 3 個檔案
-readFilePromise("./models/data1.json")
-      .then(data1=>{
-        output["data1"] = data1;
-        return readFilePromise("./models/data2.json")
-      })
-      .then(data2=>{
-        output["data2"] = data2;
-        return readFilePromise("./models/data3.json")
-      })
-      .then(data3=>{
-        output["data3"] = data3;
-        console.log(output);
-      })
-      .catch(err=>{
-        console.log(err);
-      });
+// readFilePromise("./models/data1.json")
+//       .then(data1=>{
+//         output["data1"] = data1;
+//         return readFilePromise("./models/data2.json")
+//       })
+//       .then(data2=>{
+//         output["data2"] = data2;
+//         return readFilePromise("./models/data3.json")
+//       })
+//       .then(data3=>{
+//         output["data3"] = data3;
+//         console.log(output);
+//       })
+//       .catch(err=>{
+//         console.log(err);
+//       });
 
 
+////////////////////////////////////////////////////////////////////////
+//// 3. async / await (ECMAScript 2016 ~ 2017 , ES7)
+// 定義 flipCoin function 
+let flipCoin = ()=>{
+  return new Promise( (resolve,reject)=>{
+    // 延遲時間 執行 , 以毫秒 (ms) 為單位 
+    setTimeout(()=>{
+      if(Math.random() >0.2){
+        resolve("上課囉！！！");
+      }else{
+        reject("翹課 -.-");
+      }
+    } , 500);
+  });
+};
 
+// 使用 flipCoin 
+// Promise 版
+// flipCoin()
+//   .then(r=>{
+//     console.log("成功 !!!",r);
+//   })
+//   .catch(err=>{
+//     console.log("失敗 ...",err);
+//   });
+
+// 使用 async / await
+let main = async () => {
+  // 使用 try-catch 做錯誤處理
+  try {
+    let r = await flipCoin();   // 轉成 '同步' 語言執行 --> 執行完才會往下走
+    // let r = flipCoin();      // 沒加 'await' --> 還是 '非同步'
+    console.log("Async / Await 完成！！！");
+    console.log(r);
+  } catch(err){
+    console.log(err);
+  };
+};
+
+main();
 
