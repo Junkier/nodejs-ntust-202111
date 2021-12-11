@@ -79,13 +79,58 @@ for(let i = 1 ; i < 10 ; i++){
     // console.log(i,j);
     // console.log(`${i}x${j}=${i*j}`);
 
-    let space = "";
-    if(i*j <10) space = "  ";  // 單位數 -> 兩個空白
-    else space = " ";          // 雙位數 -> 一個空白
+    // 透過 if-else 決定 space 空白個數
+    // 寫法不佳
+    // let space = "";
+    // if(i*j <10) space = "  ";  // 單位數 -> 兩個空白
+    // else space = " ";          // 雙位數 -> 一個空白
 
+    // 三元運算子 
+    let space = (i*j < 10) ? "  " : " ";
     message += `${i}x${j}=${i*j}${space}`;
   };
 
   // 再輸出顯示
   console.log(message);
 };
+
+//// 三元運算子 
+// (條件判斷) ? (True的回傳值) : (False的回傳值)
+let a = -50;
+let msg2 = a>0 ? "正數！！！" : "負數～～";
+console.log(msg2);
+////
+
+console.log("-".repeat(50));
+
+
+// 4. 費式數列
+// 1,1,2,3,5,8,13,21,...
+let fibonacci = (n) => {
+  if(n === 1 || n === 2) return 1;   // return 回傳結果 & 結束 function 
+
+  let a1 = 1;
+  let a2 = 1;
+  let r = 0;
+
+  // n=3 ->  執行 1 次
+  // n=4 ->  執行 2 次
+  // n=5 ->  執行 3 次
+  // ...
+  // -> 執行 n-2 次
+  for(let i=0 ; i < n-2 ; i++){
+    r = a1 + a2;
+    a1 = a2 ; // 移動 a1
+    a2 = r  ; // 移動 a2
+  };
+
+  return r;
+};
+
+// 顯示 費氏數列 值
+for(let k=1 ; k<100 ; k++){
+  console.log(fibonacci(k));
+};
+
+
+
