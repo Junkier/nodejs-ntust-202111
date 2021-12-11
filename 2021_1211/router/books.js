@@ -81,7 +81,7 @@ let readFilePromise = (dataPath) => {
   });
 };
 
-
+// 使用 Promise 處理讀檔案
 router.get("/multi-data-promise",(req,res)=>{
   let result = {};
   readFilePromise("./models/data1.json")
@@ -111,6 +111,7 @@ router.get("/multi-data-promise",(req,res)=>{
     });
 });
 
+// 使用 Async/Await 處理讀檔案
 router.get("/multi-data-async", async (req,res)=>{
   try {
     let result = {};
