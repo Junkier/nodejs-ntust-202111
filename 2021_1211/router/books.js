@@ -15,18 +15,59 @@ router.get("/page",(req,res)=>{
 });
 
 router.get("/data",(req,res)=>{
-  fs.readFile("data.json" , "utf8" , (err,data)=>{
-    console.log(data);
-    console.log(typeof data);  // 檢查資料型別
 
-    console.log("-".repeat(50));
+  // 檔案系統的 I/O ==> 非同步的動作 (asynchronous)
+  fs.readFile("data.json" , "utf8" , (err,data)=>{   // err -> 錯誤資料 ; data -> 您的資料
+    // 若有錯誤 , 通常沒事 err 為 undefined
+    if(err){
+      console.log(err);
+      res.send("檔案有問題！！！！");
+    } else {
+      console.log(data);
+      console.log(typeof data);  // 檢查資料型別
 
-    let result = JSON.parse(data);  // 轉成 JSON (Object) 資料型別
-    console.log(result);
-    console.log(typeof result);
-    
-    res.json(result);   // 回傳前端 JSON 資料
-    // res.send(data);  // 回傳前端 String 資料
+      console.log("-".repeat(50));
+
+      let result = JSON.parse(data);  // 轉成 JSON (Object) 資料型別
+      console.log(result);
+      console.log(typeof result);
+
+      res.json(result);   // 回傳前端 JSON 資料
+      // res.send(data);  // 回傳前端 String 資料
+    };
+  });
+});
+
+
+router.get("/data-2" , (req,res)=>{
+  let data2 = fs.readFile("data.json","utf8",()=>{});  // 您會得到一個 神秘 undefined
+  console.log(data2);
+  res.send(data2);
+
+  // let result = JSON.parse(data2);
+  // res.json(result);
+});
+
+
+router.get("/multi-data" , (req,res)=>{
+  // 讀 models/data${n}.json 的資料
+  let result = {};
+
+  fs.readFile("./models/data1.json" , "utf8" , (err,data1)=>{  
+    fs.readFile("./models/data2.json" , "utf8" , (err,data2)=>{  
+      fs.readFile("./models/data3.json" , "utf8" , (err,data3)=>{  
+        fs.readFile("./models/data4.json" , "utf8" , (err,data4)=>{  
+          fs.readFile("./models/data5.json" , "utf8" , (err,data5)=>{  
+            result["data1"] =  JSON.parse(data1);
+            result["data2"] =  JSON.parse(data2);
+            result["data3"] =  JSON.parse(data3);
+            result["data4"] =  JSON.parse(data4);
+            result["data5"] =  JSON.parse(data5);
+            res.json(result);
+          });
+        });
+      });
+    });
   });
 });
 
