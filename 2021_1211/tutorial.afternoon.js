@@ -18,7 +18,7 @@ const fs = require("fs");
 // 2. 使用 Promise 
 // 1) 宣告 Promise 
 let readFilePromise = (dataPath)=>{
-  return new Promise( (resolve,reject)=>{
+  return new Promise((resolve,reject)=>{
     fs.readFile(dataPath , "utf8" , (err,data)=>{  
       if(err){
         reject(err);
@@ -26,18 +26,69 @@ let readFilePromise = (dataPath)=>{
         resolve(JSON.parse(data));
       };
     });
-  }) ;
+  });
 };
 
-
 // 2) 使用 Promise
-readFilePromise("./models/data12345.json")
+readFilePromise("./models/data1.json")
   .then(result=>{
     console.log("我是 .then 區 ~~~");
     console.log(result);
   })
   .catch(err =>{
     console.log("我是 .catch 區！！！")
+    console.log(err);
+  });
+
+
+
+console.log("-".repeat(50));
+
+//// Promise 特性
+// flipCoin function
+let flipCoin = ()=>{
+  return new Promise( (resolve,reject)=>{
+    // 延遲時間 執行 , 以毫秒 (ms) 為單位 
+    setTimeout(()=>{
+      if(Math.random() >0.5){
+        resolve("上課囉！！！");
+      }else{
+        reject("翹課 -.-");
+      }
+    } , 500);
+  });
+};
+
+
+// flipCoin()
+//   .then(result=>{
+//     console.log("我是 flipCoin 的 .then 區～");
+//     console.log(result);
+//   })
+//   .catch(err=>{
+//     console.log("我是 flipCoin 的 .catch 區!!!");
+//     console.log(err);
+//   });
+
+flipCoin()
+  .then(result=>{
+    console.log("我是 flipCoin 的 .then 區～");
+    console.log(result);
+  })
+  .then(r2=>{
+    console.log("r2 :",r2);
+    console.log("這是第二個！！！");
+    return "ABCD";
+  })
+  .then(r3=>{
+    console.log("r3 :",r3);
+    console.log("這是第三個！！！");
+  })
+  .then(r=>{
+    console.log("這是第四個！！！");
+  })
+  .catch(err=>{
+    console.log("我是 flipCoin 的 .catch 區!!!");
     console.log(err);
   });
 
