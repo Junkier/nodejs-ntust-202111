@@ -172,10 +172,27 @@ let nums = []; // 從 1 ~ 49 可重複地抓 6 個數字出來
 
 while(nums.length <6){
   let n = Math.ceil( Math.random()*49);
-  nums.push(n);
+  // nums.push(n);
+  // 檢查元素是否在 array 裡
+  if(!(nums.includes(n))){  // 若 n 不在 nums 裡的話
+    nums.push(n);
+  }else{
+    console.log(`${n} 重複了！！！` , nums);
+  }
 };
 
 console.log(nums);
+
+// 將 Array 排序
+console.log("從小排到大 :", nums.sort( (a,b) => a-b ) );
+console.log("從大排到小 :", nums.sort( (a,b) => b-a ) );
+
+//// includes
+// console.log( [1,2,3,4,5].includes(3)  );
+// console.log( [1,2,3,4,5].includes(5)  );
+// console.log( [1,2,3,4,5].includes(0)  );
+// console.log( [1,2,3,4,5].includes(123)  );
+////
 
 
 
