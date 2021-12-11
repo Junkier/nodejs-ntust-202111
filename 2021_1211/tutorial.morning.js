@@ -100,9 +100,7 @@ let a = -50;
 let msg2 = a>0 ? "正數！！！" : "負數～～";
 console.log(msg2);
 ////
-
 console.log("-".repeat(50));
-
 
 // 4. 費式數列
 // 1,1,2,3,5,8,13,21,...
@@ -128,9 +126,49 @@ let fibonacci = (n) => {
 };
 
 // 顯示 費氏數列 值
-for(let k=1 ; k<100 ; k++){
+for(let k=1 ; k<10 ; k++){
   console.log(fibonacci(k));
 };
 
+console.log("-".repeat(50));
 
 ////////////////////////////////////////////////////////////////
+//// while-loop
+let cnt = 0;
+let limit = 50;
+
+console.log("While loop 開始");
+
+// 只要 ...
+// while(cnt< 10){
+//   console.log(`第 ${cnt} 次執行`);
+//   cnt++;  //  等同於 cnt +=1
+// };
+
+// 另一種寫法
+while(true){
+  console.log(`第 ${cnt} 次執行`);
+  cnt++;
+
+  // 結束條件
+  if(cnt === limit){
+    console.log("執行 break!!!");
+    break  // 終止迴圈
+  };
+};
+
+console.log("While loop 結束");
+
+console.log("-".repeat(50));
+
+
+//// 大樂透 抽號碼
+console.log( Math.random() );     // 0 <= x < 1   的小數
+console.log( Math.random()*49 );  // 0 <= x < 49  的小數
+console.log( Math.ceil( Math.random()*49 ) );  // 1 <= x <= 49  的整數
+
+
+let nums = []; // 從 1 ~ 49 可重複地抓 6 個數字出來
+
+
+
