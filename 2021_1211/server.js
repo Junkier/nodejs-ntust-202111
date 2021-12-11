@@ -10,7 +10,7 @@ app.get("/" , (req,res)=>{
 
 // app.get("/books/page",()=>{ ... });
 
-
+//// 將 /books , /about 處理機制轉到 router 去
 // /books/page
 // /books/data 
 // /about/page 
