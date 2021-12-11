@@ -53,6 +53,7 @@ router.get("/multi-data" , (req,res)=>{
   // 讀 models/data${n}.json 的資料
   let result = {};
 
+  // callback hell  --> 不佳
   fs.readFile("./models/data1.json" , "utf8" , (err,data1)=>{  
     fs.readFile("./models/data2.json" , "utf8" , (err,data2)=>{  
       fs.readFile("./models/data3.json" , "utf8" , (err,data3)=>{  
