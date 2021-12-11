@@ -165,10 +165,17 @@ console.log("-".repeat(50));
 //// 大樂透 抽號碼
 console.log( Math.random() );     // 0 <= x < 1   的小數
 console.log( Math.random()*49 );  // 0 <= x < 49  的小數
-console.log( Math.ceil( Math.random()*49 ) );  // 1 <= x <= 49  的整數
+console.log( Math.ceil( Math.random()*49 ) );  // 1 <= x <= 49 無條件進位的整數
 
 
 let nums = []; // 從 1 ~ 49 可重複地抓 6 個數字出來
+
+while(nums.length <6){
+  let n = Math.ceil( Math.random()*49);
+  nums.push(n);
+};
+
+console.log(nums);
 
 
 
