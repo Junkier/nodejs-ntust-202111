@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const portNum = 8088;
 
+// [module][2] 引入 /router/books.js 程式
+const booksRouter = require("./router/books.js");  // . -> 當前目錄
+
 
 // 路由設定 / end-point 設定 / API 設計
 app.get("/" , (req,res)=>{
@@ -15,6 +18,9 @@ app.get("/" , (req,res)=>{
 // /books/data 
 // /about/page 
 // /about/hihi
+
+// [module][3] 將 /books 的 requests , 導入到 booksRouter 處理
+app.use("/books" , booksRouter);
 
 app.listen(portNum , ()=>{
   console.log(`Server is running at localhost:${portNum}`);
