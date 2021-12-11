@@ -171,14 +171,20 @@ console.log( Math.ceil( Math.random()*49 ) );  // 1 <= x <= 49 無條件進位�
 let nums = []; // 從 1 ~ 49 可重複地抓 6 個數字出來
 
 while(nums.length <6){
-  let n = Math.ceil( Math.random()*49);
+  
+  // 單純地 可重複抓 6 個數字出來
+  // let n = Math.ceil( Math.random()*49);
   // nums.push(n);
+
+
+  // 不可重複地 抓 6 個數字出來
   // 檢查元素是否在 array 裡
+  let n = Math.ceil( Math.random()*49);
   if(!(nums.includes(n))){  // 若 n 不在 nums 裡的話
     nums.push(n);
   }else{
     console.log(`${n} 重複了！！！` , nums);
-  }
+  };
 };
 
 console.log(nums);
