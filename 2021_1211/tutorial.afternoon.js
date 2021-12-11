@@ -30,15 +30,15 @@ let readFilePromise = (dataPath)=>{
 };
 
 // 2) 使用 Promise
-readFilePromise("./models/data1.json")
-  .then(result=>{
-    console.log("我是 .then 區 ~~~");
-    console.log(result);
-  })
-  .catch(err =>{
-    console.log("我是 .catch 區！！！")
-    console.log(err);
-  });
+// readFilePromise("./models/data1.json")
+//   .then(result=>{
+//     console.log("我是 .then 區 ~~~");
+//     console.log(result);
+//   })
+//   .catch(err =>{
+//     console.log("我是 .catch 區！！！")
+//     console.log(err);
+//   });
 
 
 
@@ -50,7 +50,7 @@ let flipCoin = ()=>{
   return new Promise( (resolve,reject)=>{
     // 延遲時間 執行 , 以毫秒 (ms) 為單位 
     setTimeout(()=>{
-      if(Math.random() >0.5){
+      if(Math.random() >0.2){
         resolve("上課囉！！！");
       }else{
         reject("翹課 -.-");
@@ -72,26 +72,86 @@ let flipCoin = ()=>{
 //   });
 
 // .then 可多接幾段 , 並用 return 往下傳值
-flipCoin()
-  .then(result=>{
-    console.log("我是 flipCoin 的 .then 區～");
-    console.log(result);
-  })
-  .then(r2=>{
-    console.log("r2 :",r2);
-    console.log("這是第二個！！！");
-    return "ABCD";
-  })
-  .then(r3=>{
-    console.log("r3 :",r3);
-    console.log("這是第三個！！！");
-  })
-  .then(r4=>{
-    console.log("這是第四個！！！");
-  })
-  .catch(err=>{
-    console.log("我是 flipCoin 的 .catch 區!!!");
-    console.log(err);
-  });
+// flipCoin()
+//   .then(result=>{
+//     console.log("我是 flipCoin 的 .then 區～");
+//     console.log(result);
+//   })
+//   .then(r2=>{
+//     console.log("r2 :",r2);
+//     console.log("這是第二個！！！");
+//     return "ABCD";
+//   })
+//   .then(r3=>{
+//     console.log("r3 :",r3);
+//     console.log("這是第三個！！！");
+//   })
+//   .then(r4=>{
+//     console.log("這是第四個！！！");
+//   })
+//   .catch(err=>{
+//     console.log("我是 flipCoin 的 .catch 區!!!");
+//     console.log(err);
+//   });
+
+// flipCoin()
+//    .then(r=>{
+//        console.log(r);
+//        return "-> 雖然都起床了";
+//    })
+//    .then(r=>{
+//        console.log(r);
+//        return "-> 昨天太晚睡 ,還是再睡一點吧";
+//    })
+//    .then(r=>{
+//        console.log(r);
+//        return "-> 沒精神無法上課呢";
+//    })
+//    .then(r=>{
+//        console.log("-".repeat(30));
+//        console.log("翹課-.-");
+//    })
+//    .catch(err=>{
+//        console.log(err);
+//    });
+
+// Promise.all
+// a. 全部完成 (fulfilled , 成功狀態) --> 進入 .then  區
+// b. 只要有一個 rejected (失敗狀態)  --> 進去 .catch 區
+// Promise.all([
+//     flipCoin(),
+//     flipCoin(),
+//     flipCoin()
+//   ])
+//   .then(r=>{
+//     console.log("我是 Promise.all 的 .then 區!!!");
+//     console.log(r);
+//   })
+//   .catch(err=>{
+//     console.log("我是 Promise.all 的 .catch 區!!!");
+//     console.log(err);
+//   });
+
+let output = {}; 
+
+// 使用 Promise 讀取 3 個檔案
+readFilePromise("./models/data1.json")
+      .then(data1=>{
+        output["data1"] = data1;
+        return readFilePromise("./models/data2.json")
+      })
+      .then(data2=>{
+        output["data2"] = data2;
+        return readFilePromise("./models/data3.json")
+      })
+      .then(data3=>{
+        output["data3"] = data3;
+        console.log(output);
+      })
+      .catch(err=>{
+        console.log(err);
+      });
+
+
 
 
