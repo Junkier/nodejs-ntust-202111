@@ -37,7 +37,7 @@ router.get("/data",async (req,res)=>{
   };
 });
 
-// GET /intrpduction/data/:EmpNo API 
+// GET /introduction/data/:EmpNo API 
 router.get("/data/:EmpNo" ,async (req,res)=>{
   try{
     let data = await readFilePromise("data.json");
