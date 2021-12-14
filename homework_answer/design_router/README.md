@@ -45,8 +45,3 @@
 
        切勿將 ```app.get("/hello/greeting",...)``` 等相關程式碼 , 寫在 server.js 上
     3) 解答將於 **週三** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
----
-
-4. 反思區
-    1) "GET" --> 這幹嘛的?
-    2) 是否有更好 **溝通API設計** 的文件?
