@@ -12,7 +12,7 @@ window.onload = function() {
     "openapi": "3.0.1",
     "info": {
       "title": "回家試身手3 - RESTfulAPI 設計",
-      "description": "本試題為「Node.js 後端網站架設實作坊」第三次回家練習題\n\n試題詳細說明請參考 <a href=\"\nhttps://reurl.cc/emeoeK\" target='_blank'>https://reurl.cc/emeoeK</a>\n\n請依照下方的 API 說明, 在 nodejs_express 上設計此 5 組 API\n",
+      "description": "本試題為「Node.js 後端網站架設實作坊」第三次回家練習題\n\n試題詳細說明請參考 <a href=\"\nhttps://reurl.cc/emeoeK\" target='_blank'>https://reurl.cc/emeoeK</a>\n\n請依照下方的 API 說明, 在 nodejs_express 上設計此 5 組 API\n\n<h3>(此為線上唯讀版 , 測試功能無法運作)</h3>\n",
       "version": "1.0.0"
     },
     "servers": [
