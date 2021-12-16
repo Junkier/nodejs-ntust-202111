@@ -17,7 +17,7 @@ window.onload = function() {
     },
     "servers": [
       {
-        "url": "http://localhost:8088/v2/api"
+        "url": "https://test-core.jetshop.tw/"
       }
     ],
     "tags": [
