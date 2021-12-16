@@ -1,9 +1,9 @@
 # 回家試身手3 - RESTful API 設計
 
-1. 試設計 **1個 router**, 程式為 
+1. 建立 **1個 router**, 程式為 
     - router/members.js
 
-2. 在 members.js 內分別設計 5個 API
+2. 在 members.js 內分別設計 **5個 API**
 
    API 的相關說明 , 請依照下列動作 , 執行好 express server
 
@@ -21,6 +21,7 @@
         - data.json
         - router/
           - members.js
+        - api-docs (Swagger API 文件 , 無須更動)
 
     2) 本試題為閱讀 Swagger API 文件 , 設計五組 /members 相關的 API ,並測試 , 確保功能正常。 
 
