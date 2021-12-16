@@ -15,7 +15,7 @@
         - router/
           - members.js
 
-    2) 本試題為閱讀 Swagger.io API 文件 , 設計五組 /members 相關的 API , 並利用 **POSTman 做 API 測試** , 確保功能正常。 
+    2) 本試題為閱讀 Swagger.io API 文件 , 設計五組 /members 相關的 API ,並利用 **POSTman 做 API 測試** , 確保功能正常。 
 
        目的： 讓使用者可透過這些 API , 進而修改 data.json 的資料
        
