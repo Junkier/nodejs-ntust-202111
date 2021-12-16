@@ -17,7 +17,7 @@ window.onload = function() {
     },
     "servers": [
       {
-        "url": "https://insighteye.com.tw/"
+        "url": "http://localhost:8088"
       }
     ],
     "tags": [
