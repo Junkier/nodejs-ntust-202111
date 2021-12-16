@@ -17,7 +17,7 @@ window.onload = function() {
     },
     "servers": [
       {
-        "url": "https://test-core.jetshop.tw/"
+        "url": "https://insighteye.com.tw/"
       }
     ],
     "tags": [
