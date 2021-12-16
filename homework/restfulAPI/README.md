@@ -5,8 +5,15 @@
 
 2. 在 members.js 內分別設計 5個 API
 
-   API 的相關說明 , 請參考該 [Swagger.io 文件](https://reurl.cc/NZkVD6) , 相關資料放在 **data.json** 中 , 結果呈現請參考該 [影片](https://reurl.cc/NZkVD6)
+   API 的相關說明 , 請依照下列動作 , 
+    1) 複製該資料夾 , 並執行 ``` npm install ``` 安裝所需套件
+    2) 執行 ``` node server.js ``` ,
+    執行好 express server , 即可看到 API 說明文件
+    
+   相關資料放在 **data.json** 中 
         
+   亦可參考線上版 [Swagger.io 文件](https://reurl.cc/NZkVD6)
+
 3. 補充說明 
     1) 資料夾結構應為
         - server.js
