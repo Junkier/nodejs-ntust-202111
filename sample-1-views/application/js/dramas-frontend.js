@@ -1,6 +1,8 @@
 $(function(){
   
     $("#drama-select-btn").click(function(){
+
+        // [Coding]
         createTable();
     });
 
@@ -51,19 +53,25 @@ let insertNewRecord = ()=> {
 
 
     $.ajax({
-        url  : "/createNewDramaData",
+        url  : "/dramas/createNewDramaData",
         type : "POST",
+
+        //// 以 application/x-www-form-urlencoded 資料傳送
         data : {
             category,
             name,
             score
         },
+        ////
+        
+        //// 以 application/json 資料傳送
         // data : JSON.stringify({
         //     category,
         //     name,
         //     score
         // }),
         // contentType: "application/json",
+        ////
     })
     .then(r=>{
         if(r.message === "ok."){
