@@ -64,9 +64,25 @@ router.get("/getDramaListData" , async (req,res)=>{
 router.post("/CreateNewDramaData" , async (req,res)=>{
   try{
     // 取得前端傳來 Form Data 的參數值
-    console.log(req.body);
+    // console.log("req.body:",req.body);
+    let payload = req.body;
+    console.log(payload["category"]);
+    console.log(payload["name"]);
+
+    // 將 req.body (Form Data) 寫入到 sample2.json 裡
+    // 1. 先讀出此 Array
+    let data = await readFilePromise("models/sample2.json");
+
+    // 2. 使用 .push 
+    data.push(req.body);
+
+    // 3. 再把 資料寫出去 sample2.json (同步處理)
+    // fs.writeFileSync("models/sample2.json", data , "utf8");  // 會錯誤 , fs.writeFileSync 只接受 string
+    fs.writeFileSync("models/sample2.json", JSON.stringify(data) , "utf8");
+
     res.json({message : "ok."});
   } catch(err){
+    console.log(err);
     res.status(500).json({ message : "系統有問題！"});
   };
 });
