@@ -23,6 +23,13 @@ app.get("/" , (req,res)=>{
   res.render("index.html");
 });
 
+
+// HTML / Css / 前端 Js 教學
+app.get("/testqq",(req,res)=>{
+  res.render("template.html");
+});
+
+
 app.listen(portNum , ()=>{
   console.log(`Server is running at localhost:${portNum}`);
 });
