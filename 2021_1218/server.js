@@ -28,6 +28,11 @@ app.get("/" , (req,res)=>{
 
 app.use("/dramas",dramasRouter);
 
+// 關於我們 頁面
+app.get("/about/us",(req,res)=>{
+  res.render("aboutus.html");
+});
+
 //////////////////////// 
 // 前端教學用
 // HTML / Css / 前端 Js 教學

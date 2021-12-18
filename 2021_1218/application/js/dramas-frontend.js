@@ -3,7 +3,21 @@ $(function(){
     $("#drama-select-btn").click(function(){
 
         // [Coding]
-        createTable();
+        // createTable();
+        // alert("QQQQ");
+        ////////
+
+        // 使用 ajax 發 request 
+        $.ajax({
+            url  : "/dramas/getDramaListData",   // API 位置
+            type : "GET"    // requests 的方法 (種類)
+         })
+         .then(res=>{ 
+            console.log(res);
+         })
+         .catch(err =>{
+            console.log(err);
+         });
     });
 
     $("#drama-insert-btn").click(function(){

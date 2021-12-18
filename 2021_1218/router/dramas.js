@@ -6,4 +6,10 @@ router.get("/page" , (req,res)=>{
   res.render("dramas.html");
 }); 
 
+
+// GET /dramas/getDramaListData 
+router.get("/getDramaListData" , (req,res)=>{
+  res.json({ message : "嗨嗨～～～"});
+});
+
 module.exports = router;
