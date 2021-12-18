@@ -1,5 +1,5 @@
 $(function(){
-  
+
     $("#drama-select-btn").click(function(){
 
         // [Coding]
@@ -14,6 +14,7 @@ $(function(){
          })
          .then(res=>{ 
             console.log(res);
+            createTable(res["result"]);  // 丟入 Array 資料
          })
          .catch(err =>{
             console.log(err);
