@@ -96,7 +96,7 @@ let insertNewRecord = ()=> {
     .then(r=>{
         if(r.message === "ok."){
             alert("更新完成！");
-            location.reload();
+            // location.reload();  頁面 重新整理
         };
         
     })

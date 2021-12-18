@@ -17,7 +17,7 @@ router.get("/page" , (req,res)=>{
 }); 
 
 
-// GET /dramas/getDramaListData 
+// GET /dramas/getDramaListData  --> 取得 資料
 router.get("/getDramaListData" , async (req,res)=>{
   // res.json({ message : "嗨嗨～～～"});
 
@@ -49,8 +49,25 @@ router.get("/getDramaListData" , async (req,res)=>{
     };
 
   } catch (err){
+    ////// Status code 整理
+    // 2xx --> 請求 ok
+    // 3xx --> 請求 ok , 但資源換位置 , response 會告訴你下一個位置
+    // 4xx --> Client 端問題 , ex: 參數帶錯
+    // 5xx --> Server 端問題 , ex: server.js 出現 bug 
     console.log(err);
     res.status(500).json({ message: "系統有問題！"});
+  };
+});
+
+
+// POST /dramas/CreateNewDramaData  --> 新增資料 
+router.post("/CreateNewDramaData" , async (req,res)=>{
+  try{
+    // 取得前端傳來 Form Data 的參數值
+    console.log(req.body);
+    res.json({message : "ok."});
+  } catch(err){
+    res.status(500).json({ message : "系統有問題！"});
   };
 });
 

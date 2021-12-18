@@ -1,23 +1,39 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");   // 記得 npm install hbs
+
+const bodyParser = require("body-parser");  // 記得 npm install body-parser
+
 const app = express();
 const portNum = 8088;
 
 const dramasRouter = require("./router/dramas");
 
 
-// [1] 設定模板引擎 (解析 html 檔 , 讓 express 看懂 html 程式)
+// [Views][1] 設定模板引擎 (解析 html 檔 , 讓 express 看懂 html 程式)
 // hbs -> handlebars 為一種模版引擎
 // 另外一種熱門的模版引擎 --> pug 
 app.engine("html" , hbs.__express);
 
-// [2] 設定模板 (template) 位置
+// [Views][2] 設定模板 (template) 位置
 app.set("views" , path.join(__dirname , "application" , "views" ));
 
-// [3] 設定靜態檔的位置 (讀取 *.css / *.js / *.jpg / *.png / *.mp4 / ...)
+// [Views][3] 設定靜態檔的位置 (讀取 *.css / *.js / *.jpg / *.png / *.mp4 / ...)
 // --> 處理 靜態檔 相關 requests
 app.use( express.static( path.join( __dirname , "application") ));
+
+////// 使 express 可以解析 Form data 
+// [Body-Parser][1] 解析 application/json
+app.use(bodyParser.json());
+
+// [Body-Parser][2] 解析 application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  extend: false,
+  limit : "1mb",
+  parameterLimit : "10000"
+}));
+
+
 
 app.get("/" , (req,res)=>{
   // res.send("嗨嗨,  我是 Node.js server.");
