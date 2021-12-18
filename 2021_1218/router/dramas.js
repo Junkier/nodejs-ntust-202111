@@ -18,7 +18,9 @@ router.get("/page" , (req,res)=>{
 
 
 // GET /dramas/getDramaListData  --> 取得 資料
-router.get("/getDramaListData" , async (req,res)=>{
+// => 改成 GET /dramas/list
+router.get("/list" , async (req,res)=>{   // API 佳 ！！!
+// router.get("/getDramaListData" , async (req,res)=>{  // API 不佳
   // res.json({ message : "嗨嗨～～～"});
 
   //// 純 讀取 models/sample2.json  , response 給前端
@@ -61,7 +63,9 @@ router.get("/getDramaListData" , async (req,res)=>{
 
 
 // POST /dramas/CreateNewDramaData  --> 新增資料 
-router.post("/CreateNewDramaData" , async (req,res)=>{
+// => 改成 POST /dramas/data
+router.post("/data" , async (req,res) =>{  // API 佳 ！！！
+// router.post("/CreateNewDramaData" , async (req,res)=>{ // API 不佳
   try{
     // 取得前端傳來 Form Data 的參數值
     // console.log("req.body:",req.body);

@@ -14,7 +14,8 @@ $(function(){
         console.log("/dramas/getDramaListData?type=" + type);
 
         $.ajax({
-            url  : "/dramas/getDramaListData?type=" + type,   // API 位置
+            url  : "/dramas/list?type=" + type,   // API 位置
+            // url  : "/dramas/getDramaListData?type=" + type,   // API 位置
             type : "GET"    // requests 的方法 (種類)
          })
          .then(res=>{ 
@@ -73,7 +74,8 @@ let insertNewRecord = ()=> {
 
 
     $.ajax({
-        url  : "/dramas/createNewDramaData",
+        url  : "/dramas/data",
+        // url  : "/dramas/createNewDramaData",
         type : "POST",
 
         //// 以 application/x-www-form-urlencoded 資料傳送
