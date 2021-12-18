@@ -29,6 +29,10 @@ app.get("/testqq",(req,res)=>{
   res.render("template.html");
 });
 
+app.get("/data",(req,res)=>{
+  res.json({ name : "jeff" , age : 18 , message : "今天好冷喔～～～" });
+});
+
 
 app.listen(portNum , ()=>{
   console.log(`Server is running at localhost:${portNum}`);

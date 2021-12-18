@@ -17,7 +17,26 @@ $(function(){   // 等 HTML 上的標籤完成 , 才開始執行
 
   // 透過 class 綁定 click 事件 （事件聆聽)
   $(".test-btn").click(()=>{
-    alert("按到按鈕！！！");
+      alert("按到按鈕！！！");
+
+      // 目標： (前後端串接)
+      // 當 button 被 click 時 , 向後端發 request
+      // 取得 Object 
+      $.ajax({
+        url  : "/data",
+        type : "GET"
+      })
+      .then(res =>{
+        // 發 request 成功
+        console.log(res);
+
+        // 接到 response 後 , 往後長 div 出來
+        $("#wording").after(`<div> ${ res["message"] } </div>`);
+      })
+      .catch(err=>{
+        // 發 request 失敗
+        console.log(err);
+      });
   }); 
 
 });
