@@ -4,6 +4,9 @@ const hbs = require("hbs");   // 記得 npm install hbs
 const app = express();
 const portNum = 8088;
 
+const dramasRouter = require("./router/dramas");
+
+
 // [1] 設定模板引擎 (解析 html 檔 , 讓 express 看懂 html 程式)
 // hbs -> handlebars 為一種模版引擎
 // 另外一種熱門的模版引擎 --> pug 
@@ -23,7 +26,10 @@ app.get("/" , (req,res)=>{
   res.render("index.html");
 });
 
+app.use("/dramas",dramasRouter);
 
+//////////////////////// 
+// 前端教學用
 // HTML / Css / 前端 Js 教學
 app.get("/testqq",(req,res)=>{
   res.render("template.html");
@@ -32,6 +38,7 @@ app.get("/testqq",(req,res)=>{
 app.get("/data",(req,res)=>{
   res.json({ name : "jeff" , age : 18 , message : "今天好冷喔～～～" });
 });
+////////////////////////
 
 
 app.listen(portNum , ()=>{

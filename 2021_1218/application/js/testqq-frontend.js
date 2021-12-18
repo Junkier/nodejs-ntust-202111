@@ -22,6 +22,7 @@ $(function(){   // 等 HTML 上的標籤完成 , 才開始執行
       // 目標： (前後端串接)
       // 當 button 被 click 時 , 向後端發 request
       // 取得 Object 
+      //// ajax -> 非同步請求
       $.ajax({
         url  : "/data",
         type : "GET"
