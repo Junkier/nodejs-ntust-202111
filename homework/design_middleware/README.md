@@ -27,7 +27,7 @@
           - members.js
         - api-docs  ( API 文件 , 無須更動)
 
-    2) 本試題為使用 **Middleware 將 API 內部動作流程分解** , 並透過閱讀 Swagger API 文件 , 完成三組 /members 的 API 設計。
+    2) 本試題為 **使用Middleware 將 API 內部動作流程分解** , 並透過閱讀 Swagger API 文件 , 完成三組 /members 的 API 設計。
 
        <h3>
        目的： 使 API 本身具備 token 權限驗證 / 參數檢查 等機制 
