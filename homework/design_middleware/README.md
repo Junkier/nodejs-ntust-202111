@@ -26,14 +26,14 @@
           - members.js
         - api-docs  ( API 文件 , 無須更動)
 
-    2) 本試題為將 API 內部動作使用 **Middleware** 作流程分解, 並透過閱讀 Swagger API 文件 , 將三組 /members 相關的 API 設計完成。
+    2) 本試題為使用 **Middleware** 將 API 內部動作 流程分解, 並透過閱讀 Swagger API 文件 , 將三組 /members 相關的 API 設計完成。
 
        <h3>
        目的： 
        <br>
-       讓 API 本身具備 token 權限驗證 / 參數檢查 等機制 
+       使 API 本身具備 token 權限驗證 / 參數檢查 等機制 
        <br>
-       並且讓使用者可透過這些 API , 進而修改 data.json 的資料
+       且讓使用者可透過這些 API , 進而修改 data.json 的資料
        </h3>
        
     3) 解答將於 **週三** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
