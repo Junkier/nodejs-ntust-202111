@@ -12,14 +12,15 @@
 
    即可從 http://localhost:8088 看到 API 說明文件
    
-   相關資料放在 **data.json & secrets.js** 中 
+   相關資料放在 **data.json & config/secrets.js** 中 
         
    <!-- 亦可參考線上版 [Swagger.io 文件](https://reurl.cc/NZkVD6)  等等 GOGOGO !!!-->
 
 3. 補充說明 
     1) 資料夾結構應為
         - server.js
-        - secrets.js (此為模擬 server 端所持有的 認證token)
+        - config/
+          - secrets.js (此為模擬 server 端所持有的 認證token)
         - package.json
         - data.json
         - router/
