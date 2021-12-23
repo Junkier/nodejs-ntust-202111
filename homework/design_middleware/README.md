@@ -24,9 +24,7 @@
     1) 複製該資料夾 , 並執行 ``` npm install ``` 安裝所需套件
     2) 執行 ``` node server.js ``` 
 
-   即可從 http://localhost:8088 看到 API 說明文件
-
-   亦可參考線上版 [Swagger.io 文件](https://reurl.cc/V5ye96) 
+   即可從 http://localhost:8088 看到 API 說明文件 , 也可參考線上版 [Swagger.io 文件](https://reurl.cc/V5ye96) 
 
    而 JWT 的用法亦可從 http://localhost:8088 看到說明
    
