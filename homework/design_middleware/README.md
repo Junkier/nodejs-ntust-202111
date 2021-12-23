@@ -1,11 +1,11 @@
 # 回家試身手4 - Middleware 設計
 
-本試題為 **使用 Middleware 將 API 內部動作流程分解** , 並透過閱讀 Swagger API 文件 , 完成 4組 /members 的 API 設計。
+本試題為 **使用 Middleware 將 API 內部動作流程分解** , 並透過 Swagger API 文件 , 完成 4組 /auth & /members 的 API 設計。
 
-有別於課程中的 session , 本試題使用 **JWT (jsonwebtoken)** 實作登入驗證機制
+有別於課程中的 **cookie & session 機制** , 本試題使用 **JWT (jsonwebtoken)** 實作登入驗證機制
 
 <h3>
-目的： 使 API 本身具備 token 權限驗證 / 參數檢查 等機制 
+目的： 使 API 本身具備 token 權限驗證 / 參數檢查 等功能
 </h3>
 
 且讓使用者可透過這些 API , 進而修改 data.json 的資料
@@ -23,9 +23,8 @@
 
    即可從 http://localhost:8088 看到 API 說明文件
 
-   在 auth.js 內設計 **1個 API** , 做為登入驗證用
-
-   在 members.js 內分別設計 **3個 API** , 作為操作資料使用
+   - 在 auth.js 內設計 **1個 API** , 做為登入驗證用
+   - 在 members.js 內分別設計 **3個 API** , 作為操作資料使用
    
    <!-- 亦可參考線上版 [Swagger.io 文件](https://reurl.cc/NZkVD6)  等等 GOGOGO !!!-->
 
