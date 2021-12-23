@@ -28,7 +28,7 @@
 
    而 JWT 的用法亦可從 http://localhost:8088 看到說明
    
-   程式部分可參考 ```router/sample.js``` && ```utils/auth-helper.js```
+   程式部分請參考 ```router/sample.js``` && ```utils/auth-helper.js```
 
 3. 補充說明 
     1) 前端預期 使用者 會先透過 ```POST /auth``` 做登入驗證 , 取得 ```token```
@@ -52,7 +52,11 @@
         - package.json
         - api-docs  (API 文件 , 無須更動)
        
-    2) 解答將於 **???** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
+    4) JWT 相關優質好文
+       - [阮一峰老師](https://reurl.cc/RbaEre)
+       - [麥克的半路出家筆記-透過 JWT 實作驗證機制](https://reurl.cc/Q68GLp)
+    
+    3) 解答將於 **???** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
 
 ---
 
