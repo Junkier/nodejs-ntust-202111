@@ -53,7 +53,7 @@
         - api-docs  (API 文件 , 無須更動)
        
     4) JWT 相關優質好文
-       - [阮一峰老師](https://reurl.cc/RbaEre)
+       - [阮一峰老師-JSON Web Token 入门教程](https://reurl.cc/RbaEre)
        - [麥克的半路出家筆記-透過 JWT 實作驗證機制](https://reurl.cc/Q68GLp)
     
     3) 解答將於 **???** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
