@@ -157,7 +157,7 @@ paths:
               
               - token decoded 失敗  -> 回覆失敗 400: { "message" : "該 token 無效!" }
              
-              ```(可使用 auth-helper.js 上的 tokenDecode middleware 進行解密)```
+              ```(可使用 auth-helper.js 上的 decodeToken middleware 進行解密)```
            
           2. 正常    
              - 成功 200 並回傳 data 的所有資料，i.e. : { "10001" : {…}, "10002" : {…} ,"10003" : {…} , … }

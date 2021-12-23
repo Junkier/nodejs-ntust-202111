@@ -5,9 +5,8 @@ const jwtOptions   = require("../config/config").jwtOptions;
 const jwtExpTime   = require("../config/config").jwtExpTime;
 
 
-// [Code] 請將 user 的資訊 , 放在 req.data 中 
-// 方便 createToken 作加密 , 收錄在 jwt 之中
-
+// [注意！！！] 請將 user 的資訊 , 放在 req.data 裡
+// 方便 createToken 加密在 jwt 之中
 exports.createToken = (req,res,next)=>{
 
     let payload = {
@@ -28,19 +27,20 @@ exports.createToken = (req,res,next)=>{
 
 };
 
-exports.tokenDecode = (req,res,next) => {
+exports.decodeToken = (req,res,next) => {
     // 預期前端使用 query_string 方式攜帶 jwt
-    let token = req.query.access_token;
+    let token = req.query.token;
 
     // 將 jwt 解密
     jwt.verify(token, jwtSecret, jwtOptions, (err, decoded)=> {
         if(err){
             console.error(err);
-            res.status(400).json({message : "Token is invalid."});
+            res.status(400).json({message : "該 token 無效!"});
             return;
         };
 
-        req.user = decoded;
+        // 解密的資料 , 存入 req.user 上
+        req.user = decoded.data;
 
         next();
     });

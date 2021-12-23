@@ -28,6 +28,10 @@
 
    亦可參考線上版 [Swagger.io 文件](https://reurl.cc/V5ye96) 
 
+   而 JWT 的用法亦可從 http://localhost:8088 看到說明
+   
+   程式部分可參考 ```router/sample.js && utils/auth-helper.js```
+
 3. 補充說明 
     1) 前端預期 使用者 會先透過 ```POST /auth``` 做登入驗證 , 取得 ```token```
        後再攜帶 ```token``` 操作其他 API , 達到修改 ```data.json``` 的目的
@@ -46,6 +50,7 @@
         - router/
           - members.js
           - auth.js
+          - sample.js (demo jwt & auth-helper.js 如何使用)
         - package.json
         - api-docs  (API 文件 , 無須更動)
        
