@@ -17,6 +17,7 @@
         - 在 auth.js 內設計 **1個 API** , 做為登入驗證用
     - router/members.js
         - 在 members.js 內分別設計 **3個 API** , 作為操作資料使用
+        - 這些 API 皆必須攜帶 token , 驗證 ok 情況下才可呼叫使用
 
 2. API 的相關說明 , 請依照下列動作 , 執行好 express server
 
@@ -53,6 +54,6 @@
 ---
 
 4. 反思區
-    1) JWT & cookies_session 機制差異在哪裡? 各有什麼優缺點?
+    1) JWT / cookie & session 機制差異在哪裡? 各有什麼優缺點?
     2) 如何有效地 開發 & 設計 API ?
     3) 受夠修改 data.json 了嗎？
