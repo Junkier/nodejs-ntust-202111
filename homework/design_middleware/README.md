@@ -26,7 +26,7 @@
    - 在 auth.js 內設計 **1個 API** , 做為登入驗證用
    - 在 members.js 內分別設計 **3個 API** , 作為操作資料使用
    
-   <!-- 亦可參考線上版 [Swagger.io 文件](https://reurl.cc/NZkVD6)  等等 GOGOGO !!!-->
+   亦可參考線上版 [Swagger.io 文件](https://reurl.cc/V5ye96) 
 
 3. 補充說明 
     1) 前端預期 使用者 會先透過 ```POST /auth``` 做登入驗證 , 取得 ```access_token```
