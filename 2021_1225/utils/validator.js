@@ -47,5 +47,5 @@ module.exports = {
     "isTokenExist" : isTokenExist, // value 為 middleware 本人 
     "isTokenValid" : isTokenValid,
     "isAccountAndPasswdExist" : isAccountAndPasswdExist,
-    "isUserValid" : isAccountAndPasswdExist
+    "isUserValid" : isUserValid
 };
