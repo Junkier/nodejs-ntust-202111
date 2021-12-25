@@ -11,7 +11,7 @@ router.post("/",
   validator.isUserValid,
 
   // 3. 紀錄資料在 session 上面
-  // validator.setSessionInfo,
+  validator.setSessionInfo,
 
   // 4. response 回應前端
   (req,res,next)=>{

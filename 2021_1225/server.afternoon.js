@@ -3,6 +3,7 @@ const path = require("path");
 const hbs = require("hbs");   
 
 const bodyParser = require("body-parser");  
+const session = require("express-session");   // [Session][1] 安裝 express-session 
 
 const app = express();
 const portNum = 8088;
@@ -29,6 +30,19 @@ app.use(bodyParser.urlencoded({
 }));
 //////////////////////////////////////////
 
+//////////////////////////////////////////
+// 處理 session 資料的 middleware 
+// 後面才可用 req.session 做資料存取
+// [Session][2] 設定 session middleware
+app.use(session({
+  secret : "c90dis90#" ,
+  resave : true,
+  saveUninitialized : false,
+  name   : "_ntust_tutorial_id",
+  ttl    : 24*60*60*1
+}));
+//////////////////////////////////////////
+
 ////// 登入驗證
 // V 1. 加入 login 頁面
 // 2. POST /auth API 驗證 + 紀錄資料到 session 上
@@ -42,9 +56,20 @@ app.get("/login" , (req,res)=>{
 });
 
 
-app.get("/" , (req,res)=>{
-  res.render("index.html");
-});
+app.get("/" , 
+  // [Session][4] 加入 登入驗證判斷 middleware
+  (req,res,next)=>{  // 是否登入驗證
+    console.log(req.session);
+    if(req.session.userInfo && req.session.userInfo.isLogined === true){
+      next();
+    }else{
+      res.send("您尚未登入！！！");
+    };
+  },
+  (req,res)=>{
+    res.render("index.html");
+  }
+);
 
 app.use("/dramas",dramasRouter);
 app.use("/auth" , authRouter);
