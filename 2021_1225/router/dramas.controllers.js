@@ -2,6 +2,13 @@ const express = require("express");
 const fs = require("fs");
 const router = express.Router();
 
+const validator = require("../utils/validator");
+// 此時 validator 變數 即為 {
+//     "isTokenExist" : isTokenExist, // value 為 middleware 本人 
+//     "isTokenValid" : isTokenValid  
+// }
+
+
 let readFilePromise = (dataPath)=>{
   return new Promise( (resolve , reject) =>{
     fs.readFile(dataPath,"utf8" , (err,data)=>{
@@ -20,7 +27,12 @@ router.get("/page" , (req,res)=>{
 // [改動]
 // GET /dramas/list  --> 取得 資料
 // [Work1] 加入參數檢查 Middleware 
-router.get("/list" , 
+// [Work3] 使用 共用的 Middleware (實名 Middleware)
+router.get("/list" ,
+  
+  validator.isTokenExist,   // 檢查 token 是否存在
+  validator.isTokenValid,   // 檢查 token 是否正確
+
   // 1. 檢查 type 值是否存在 (M1)
   (req,res,next) => {
     if(!req.query.type){
@@ -31,7 +43,6 @@ router.get("/list" ,
       next();
     };
   },
-
   // 2. 檢查 type 是否正確 (M2)
   (req,res,next) => {
       
@@ -93,7 +104,7 @@ router.post("/data" ,
   },
   // 2. 檢查 token 值是否正確 (M2)
   (req,res,next) => {
-    if(req.headers["x-jeff-token"] !== "APTX4869"){
+    if(req.headers["x-jeff-token"] !== "AZ"){
       console.log("[M2] token 錯誤！！！");
 
       // status_code=403 --> 無權限 (Forbidden.)
