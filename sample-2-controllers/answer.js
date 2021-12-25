@@ -48,8 +48,6 @@ app.use(session({
 }))
 
 
-
-
 app.get("/login",(req,res)=>{
     res.render("login.html");
 });
