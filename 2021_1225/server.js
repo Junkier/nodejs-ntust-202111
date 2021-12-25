@@ -21,7 +21,7 @@ app.use( express.static( path.join( __dirname , "application") ));
 //////////////////////////////////////////
 
 //////////////////////////////////////////
-// 使用 body-parser 處理  Form data 
+// 使用 body-parser 處理  Form data  (req.body)
 // [Body-Parser][1] 解析 application/json
 app.use(bodyParser.json());
 

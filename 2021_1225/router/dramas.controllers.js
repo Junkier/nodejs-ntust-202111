@@ -23,16 +23,18 @@ router.get("/page" , (req,res)=>{
   res.render("dramas.html");
 }); 
 
+// .use -> request 100% 會經過的 Middleware 
+router.use(
+  validator.isTokenExist,   // 檢查 token 是否存在
+  validator.isTokenValid,   // 檢查 token 是否正確
+);
+
 
 // [改動]
 // GET /dramas/list  --> 取得 資料
 // [Work1] 加入參數檢查 Middleware 
 // [Work3] 使用 共用的 Middleware (實名 Middleware)
 router.get("/list" ,
-  
-  validator.isTokenExist,   // 檢查 token 是否存在
-  validator.isTokenValid,   // 檢查 token 是否正確
-
   // 1. 檢查 type 值是否存在 (M1)
   (req,res,next) => {
     if(!req.query.type){
@@ -91,28 +93,37 @@ router.get("/list" ,
 // POST /dramas/data  --> 新增資料 
 // [Work 2] 加入 API token 檢查機制 , 預期 使用者 token 寫在 headers
 router.post("/data" , 
-  // 1. 檢查 headers 是否有 token (M1)
-  (req,res,next) => {
-    // 檢查 headers --> req.headers
-    // console.log(req.headers);
-    if(!req.headers["x-jeff-token"] ){
-      console.log("[M1] 無 token !!!");
-      res.status(400).json({ message : "token 人呢！？！？！？"});
-    }else{
-      next();
-    };
-  },
-  // 2. 檢查 token 值是否正確 (M2)
-  (req,res,next) => {
-    if(req.headers["x-jeff-token"] !== "AZ"){
-      console.log("[M2] token 錯誤！！！");
 
-      // status_code=403 --> 無權限 (Forbidden.)
-      res.status(403).json({ message : "您沒有權限！"});
-    }else{
-      next();
-    };
-  },
+  // ////// 使用 validator.js 的 Middleware (實名 Middleware)
+  // validator.isTokenExist,   // 檢查 token 是否存在
+  // validator.isTokenValid,   // 檢查 token 是否正確
+  // //////////////////////////////
+
+  //////////////////////////////
+  // 匿名 Middleware (anonymous middleware)
+  // // 1. 檢查 headers 是否有 token (M1)
+  // (req,res,next) => {
+  //   // 檢查 headers --> req.headers
+  //   // console.log(req.headers);
+  //   if(!req.headers["x-jeff-token"] ){
+  //     console.log("[M1] 無 token !!!");
+  //     res.status(400).json({ message : "token 人呢！？！？！？"});
+  //   }else{
+  //     next();
+  //   };
+  // },
+  // // 2. 檢查 token 值是否正確 (M2)
+  // (req,res,next) => {
+  //   if(req.headers["x-jeff-token"] !== "AZ"){
+  //     console.log("[M2] token 錯誤！！！");
+
+  //     // status_code=403 --> 無權限 (Forbidden.)
+  //     res.status(403).json({ message : "您沒有權限！"});
+  //   }else{
+  //     next();
+  //   };
+  // },
+  //////////////////////////////
   // 3. 處理業務邏輯 (M3)
   async (req,res) =>{  // API 佳 ！！！
     try{

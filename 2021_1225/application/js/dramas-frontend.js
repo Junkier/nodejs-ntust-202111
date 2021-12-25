@@ -91,8 +91,8 @@ let insertNewRecord = ()=> {
         // 新增 headers key-value pair
         headers : {
             // 1. 沒帶 token 
-            // "X-jeff-token" : "BNT-ZZZ"  // 2. token 帶錯
-            "X-jeff-token" : "APTX4869"    // 3. token 正確
+            "X-jeff-token" : "BNT-ZZZ"  // 2. token 帶錯
+            // "X-jeff-token" : "APTX4869"    // 3. token 正確
         },
 
         //// 以 application/x-www-form-urlencoded 資料傳送
