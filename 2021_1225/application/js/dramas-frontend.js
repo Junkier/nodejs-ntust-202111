@@ -15,8 +15,8 @@ $(function(){
 
         $.ajax({
             // [改動]
-            url  : "/dramas/list",              // 1. 忘記帶 type 
-            // url  : "/dramas/list?type=ABCD",    // 2. type 亂帶
+            // url  : "/dramas/list",                 // 1. 忘記帶 type 
+            url  : "/dramas/list?type=ABCD",    // 2. type 亂帶
             // url  : "/dramas/list?type=" + type, // 3. type 正常
             type : "GET"    // requests 的方法 (種類)
          })

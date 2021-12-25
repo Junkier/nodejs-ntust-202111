@@ -19,6 +19,7 @@ router.get("/page" , (req,res)=>{
 
 // [改動]
 // GET /dramas/list  --> 取得 資料
+// [Work1] 加入參數檢查 Middleware 
 router.get("/list" , 
   // 1. 檢查 type 值是否存在 (M1)
   (req,res,next) => {
@@ -32,8 +33,21 @@ router.get("/list" ,
   },
 
   // 2. 檢查 type 是否正確 (M2)
-  // (req,res,next) => {},
+  (req,res,next) => {
+      
+    // type 值 是否正確 
+    let data = ["犯罪","殭屍","愛情","政治","其他","全"];
+    
+    // if indexOf -> -1 , type 不在 array 裡
+    if( data.indexOf(req.query.type) === -1  ){
+      console.log("發生錯誤2！！！");
+      // status_code=400 -> Client 端 request 有問題
+      res.status(400).json({ message : "type 值有誤！"});
+    }else{
+      next();
+    };
 
+  },
   // 最後的 Middleware (M3 , 處理業務邏輯)
   async (req,res)=>{   
     //// 讀取 models/sample2.json  
