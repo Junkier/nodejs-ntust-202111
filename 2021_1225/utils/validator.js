@@ -21,9 +21,31 @@ let isTokenValid = (req,res,next) => {
   };
 };
 
+// 1. 檢查 account / passwd 是否存在
+let isAccountAndPasswdExist = (req,res,next) => {
+  // 檢查 payload (Form data , req.body)
+  if(!req.body.account || !req.body.passwd){  // 若 account or passwd 不存在
+    res.status(400).json({ message : "帳號 or 密碼 缺少！"});
+  }else{
+    next();
+  };
+};
+
+// 2. 再 檢查 account / passwd 是否和 server 端一致
+let isUserValid = (req,res,next) =>{
+  // 若 account && passwd 和 server 端一致
+  if( !(req.body.account === "jeff" && req.body.passwd === "testqq") ) {   
+    res.status(400).json({ message : "帳號 or 密碼 錯誤!"});
+  }else{
+    next();
+  };
+};
+
 
 // 一定要 module.exports 出去 
 module.exports = {
     "isTokenExist" : isTokenExist, // value 為 middleware 本人 
-    "isTokenValid" : isTokenValid  
+    "isTokenValid" : isTokenValid,
+    "isAccountAndPasswdExist" : isAccountAndPasswdExist,
+    "isUserValid" : isAccountAndPasswdExist
 };

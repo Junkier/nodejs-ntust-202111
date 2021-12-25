@@ -29,8 +29,14 @@ app.use(bodyParser.urlencoded({
 }));
 //////////////////////////////////////////
 
+////// 登入驗證
+// V 1. 加入 login 頁面
+// 2. POST /auth API 驗證 + 紀錄資料到 session 上
+// 3. GET /logout 登出 API 
+// 4. 加入 登入驗證 middleware (isUserLogined)
 
-// 1. 加入 login 頁面
+
+// 加入 login 頁面
 app.get("/login" , (req,res)=>{
   res.render("login.html");
 });
