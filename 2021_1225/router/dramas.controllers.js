@@ -78,38 +78,64 @@ router.get("/list" ,
 
 
 // POST /dramas/data  --> 新增資料 
-router.post("/data" , async (req,res) =>{  // API 佳 ！！！
-  try{
-    ////////////// 2) 新增 dramaId (Primary Key , 主鍵)
-    // 將 req.body (Form Data) 寫入到 sample2.json 裡
-    // 1. 先讀出此 Array
-    let data = await readFilePromise("models/sample2.json");
+// [Work 2] 加入 API token 檢查機制 , 預期 使用者 token 寫在 headers
+router.post("/data" , 
+  // 1. 檢查 headers 是否有 token (M1)
+  (req,res,next) => {
+    // 檢查 headers --> req.headers
+    // console.log(req.headers);
+    if(!req.headers["x-jeff-token"] ){
+      console.log("[M1] 無 token !!!");
+      res.status(400).json({ message : "token 人呢！？！？！？"});
+    }else{
+      next();
+    };
+  },
+  // 2. 檢查 token 值是否正確 (M2)
+  (req,res,next) => {
+    if(req.headers["x-jeff-token"] !== "APTX4869"){
+      console.log("[M2] token 錯誤！！！");
 
-    // 2. 使用 .push 
-    // data -> [{} , {} , {} , ... ]
-    // 抓出最新的 dramaId 
-    let latestDramaId = data.map( ele => ele["dramaId"])    // 取得 dramaId
-                            .filter( v=> v !== undefined)   // 過濾 undefined 資料
-                            .sort((a,b)=> b-a)[0];          // 從大 -> 小排序
+      // status_code=403 --> 無權限 (Forbidden.)
+      res.status(403).json({ message : "您沒有權限！"});
+    }else{
+      next();
+    };
+  },
+  // 3. 處理業務邏輯 (M3)
+  async (req,res) =>{  // API 佳 ！！！
+    try{
+      ////////////// 2) 新增 dramaId (Primary Key , 主鍵)
+      // 將 req.body (Form Data) 寫入到 sample2.json 裡
+      // 1. 先讀出此 Array
+      let data = await readFilePromise("models/sample2.json");
 
-    let newDramaId = Number(latestDramaId )+ 1 ; // 因 latestDramaId 為 String
+      // 2. 使用 .push 
+      // data -> [{} , {} , {} , ... ]
+      // 抓出最新的 dramaId 
+      let latestDramaId = data.map( ele => ele["dramaId"])    // 取得 dramaId
+                              .filter( v=> v !== undefined)   // 過濾 undefined 資料
+                              .sort((a,b)=> b-a)[0];          // 從大 -> 小排序
 
-    // 新增 dramaId 欄位
-    req.body.dramaId = String(newDramaId) ;  // 將 newDramaId 轉換為 String
+      let newDramaId = Number(latestDramaId )+ 1 ; // 因 latestDramaId 為 String
 
-    data.push(req.body);
+      // 新增 dramaId 欄位
+      req.body.dramaId = String(newDramaId) ;  // 將 newDramaId 轉換為 String
 
-    // 3. 再把 資料寫出去 sample2.json (同步處理)
-    fs.writeFileSync("models/sample2.json", JSON.stringify(data) , "utf8");
+      data.push(req.body);
 
-    res.json({message : "ok."});
-    //////////////
+      // 3. 再把 資料寫出去 sample2.json (同步處理)
+      fs.writeFileSync("models/sample2.json", JSON.stringify(data) , "utf8");
+
+      res.json({message : "ok."});
+      //////////////
 
 
-  } catch(err){
-    console.log(err);
-    res.status(500).json({ message : "系統有問題！"});
-  };
-});
+    } catch(err){
+      console.log(err);
+      res.status(500).json({ message : "系統有問題！"});
+    };
+  }
+);
 
 module.exports = router;

@@ -15,9 +15,9 @@ $(function(){
 
         $.ajax({
             // [改動]
-            // url  : "/dramas/list",                 // 1. 忘記帶 type 
-            url  : "/dramas/list?type=ABCD",    // 2. type 亂帶
-            // url  : "/dramas/list?type=" + type, // 3. type 正常
+            // url  : "/dramas/list",              // 1. 忘記帶 type 
+            // url  : "/dramas/list?type=ABCD",    // 2. type 亂帶
+            url  : "/dramas/list?type=" + type, // 3. type 正常
             type : "GET"    // requests 的方法 (種類)
          })
          .then(res=>{ 
@@ -84,6 +84,14 @@ let insertNewRecord = ()=> {
         // url  : "/dramas/createNewDramaData",
         type : "POST",
 
+        // [改動]
+        // 新增 headers key-value pair
+        headers : {
+            // 1. 沒帶 token 
+            // "X-jeff-token" : "BNT-ZZZ"  // 2. token 帶錯
+            "X-jeff-token" : "APTX4869"    // 3. token 正確
+        },
+
         //// 以 application/x-www-form-urlencoded 資料傳送
         data : {
             category,
@@ -111,11 +119,13 @@ let insertNewRecord = ()=> {
     .catch(err=>{
         console.log(err);
 
+        alert(err.responseJSON.message);
+
         if(err.status === 404){
             alert("找不到該 API !");
             return;
         };
         
-        alert("系統有誤 , 請稍後再試！");
+        // alert("系統有誤 , 請稍後再試！");
     });
 };
