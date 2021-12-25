@@ -14,16 +14,22 @@ $(function(){
         console.log("/dramas/getDramaListData?type=" + type);
 
         $.ajax({
-            url  : "/dramas/list?type=" + type,   // API 位置
-            // url  : "/dramas/getDramaListData?type=" + type,   // API 位置
+            // [改動]
+            url  : "/dramas/list",              // 1. 忘記帶 type 
+            // url  : "/dramas/list?type=ABCD",    // 2. type 亂帶
+            // url  : "/dramas/list?type=" + type, // 3. type 正常
             type : "GET"    // requests 的方法 (種類)
          })
          .then(res=>{ 
+            // 成功 -> status_code = 2XX , 3XX
             console.log(res);
             createTable(res["result"]);  // 丟入 Array 資料
          })
          .catch(err =>{
+            // 失敗 -> status_code = 4XX , 5XX
+            // [改動]
             console.log(err);
+            alert(err.responseJSON.message);
          });
     });
 

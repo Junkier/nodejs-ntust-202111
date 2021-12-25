@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");  // 記得 npm install body-parser
 const app = express();
 const portNum = 8088;
 
-const dramasRouter = require("./router/dramas");
+// const dramasRouter = require("./router/dramas.views");
+const dramasRouter = require("./router/dramas.controllers"); // [改動]
 
 
 //////////////////////////////////////////
