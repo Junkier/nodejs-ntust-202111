@@ -67,7 +67,7 @@ router.get("/list" , async (req,res)=>{   // API 佳 ！！!
 router.post("/data" , async (req,res) =>{  // API 佳 ！！！
 // router.post("/CreateNewDramaData" , async (req,res)=>{ // API 不佳
   try{
-    ////////////// 2) 新增 dramaId
+    ////////////// 2) 新增 dramaId (Primary Key , 主鍵)
     // 取得前端傳來 Form Data 的參數值
     // let payload = req.body;
 

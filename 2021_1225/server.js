@@ -10,19 +10,17 @@ const portNum = 8088;
 const dramasRouter = require("./router/dramas");
 
 
-// [Views][1] 設定模板引擎 (解析 html 檔 , 讓 express 看懂 html 程式)
-// hbs -> handlebars 為一種模板引擎
-// 另外一種熱門的模板引擎 --> pug 
+//////////////////////////////////////////
+// 設定模板引擎
 app.engine("html" , hbs.__express);
 
-// [Views][2] 設定模板 (template) 位置
 app.set("views" , path.join(__dirname , "application" , "views" ));
 
-// [Views][3] 設定靜態檔的位置 (讀取 *.css / *.js / *.jpg / *.png / *.mp4 / ...)
-// --> 處理 靜態檔 相關 requests
 app.use( express.static( path.join( __dirname , "application") ));
+//////////////////////////////////////////
 
-////// 使 express 可以解析 Form data 
+//////////////////////////////////////////
+// 使用 body-parser 處理  Form data 
 // [Body-Parser][1] 解析 application/json
 app.use(bodyParser.json());
 
@@ -32,6 +30,7 @@ app.use(bodyParser.urlencoded({
   limit : "1mb",      // 限制 參數資料大小
   parameterLimit : "10000" // 限制參數個數 
 }));
+//////////////////////////////////////////
 
 
 app.get("/" , (req,res)=>{
@@ -49,17 +48,36 @@ app.get("/about/us",(req,res)=>{
   res.render("aboutus.html");
 });
 
-//////////////////////// 
-// 前端教學用
-// HTML / Css / 前端 Js 教學
-app.get("/testqq",(req,res)=>{
-  res.render("template.html");
-});
 
-app.get("/data",(req,res)=>{
-  res.json({ name : "jeff" , age : 18 , message : "今天好冷喔～～～" });
-});
-////////////////////////
+
+app.get("/hello" , 
+  (req,res,next)=>{
+    // 往下一個 Middleware (中介函式) 執行
+    console.log("我是 Middleware 1");
+
+    // 顯示 name 參數
+    console.log(`您是 :${ req.query.name }`);
+    next();
+  },
+  (req,res,next)=>{
+    console.log("我是 Middleware 2");
+
+    // 顯示 age 參數
+    console.log(`您今年 : ${req.query.age} 歲`);
+    next();
+  },
+  (req,res,next)=>{
+    console.log("我是 Middleware 3");
+    next();
+  },
+  (req,res)=>{
+    console.log("我是 Middleware 4");
+    res.send("Hello , 過敏好可怕～～～");
+  }
+);
+
+
+
 
 
 app.listen(portNum , ()=>{
