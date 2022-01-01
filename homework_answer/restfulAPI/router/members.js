@@ -100,13 +100,80 @@ router.put("/detail/:memNo",async (req,res)=>{
 });
 
 // 4. POST /members 
-router.post("/",(req,res)=>{
-  res.json({ message : "這是 POST /members API ."});
+router.post("/",async (req,res)=>{
+  try{
+    // 1) 檢查 req.body (payload) 是否有 name / gender / age 這三個參數
+    //    X --> res 400
+    let payload = req.body;
+    if(!payload["name"] || !payload["gender"] || !payload["age"]){
+      res.status(400).json({ 
+        message : "req.body 的資料格式有誤！"
+      });
+      return;  // 結束這個 處理函式  
+    };
+
+    // 2) 讀 data.json 
+    // data -> { "10001" : {...} , "10002" : {...} , ...}
+    let data = await readFilePromise("./data.json");
+
+    // 3) 找出最新 memNo , 並新增 payload 到 data 中
+    let lastMemNo = Object.keys(data)   // -> ["10001","10002",... , "10005"]
+                          .map(key => Number(key))  // -> [10001,10002, ... , 10005]
+                          .sort((a,b) => b-a)[0];   // -> [10005,10004, ... , 10001]
+    
+    let newMemNo = lastMemNo +1 ;  // 建立最新的 memNo 
+
+    data[newMemNo] = payload;
+
+    // 把 data 資料寫出到 data.json 
+    fs.writeFileSync("./data.json", JSON.stringify(data) , "utf8");
+
+    res.json({
+      message: "ok",
+      memNo  : newMemNo
+    });
+  } catch(err){
+    console.log(err);
+    res.status(500).json({ message : "Server 端發生錯誤！"});
+  };
 });
 
 // 5. DELETE /members
-router.delete("/",(req,res)=>{
-  res.json({ message : "這是 DELETE /members API ."});
+router.delete("/",async (req,res)=>{
+
+  try{
+    let data = await readFilePromise("./data.json");
+    // data -> { "10001" : {...} , "10002" : {...} , ...}
+
+    let memNo = req.query.memNo; // 使用 query_string 帶 memNo
+    let result = data[memNo];
+
+    // 檢查 result 是否為 undefined
+    if(!result){
+      res.status(404).json({ 
+        message : "Not Found" , 
+        affectedRows : 0
+      });
+      return;
+    };
+
+    // 刪除資料
+    delete data[memNo];
+
+    // 把 data 資料寫出到 data.json 
+    fs.writeFileSync("./data.json", JSON.stringify(data) , "utf8");
+
+    res.json({
+      message : "ok",
+      affectedRows : 1
+    });
+
+  } catch(err){
+    console.log(err);
+    res.status(500).json({ message : "Server 端發生錯誤！"});
+  };
+
+  // res.json({ message : "這是 DELETE /members API ."});
 });
 
 

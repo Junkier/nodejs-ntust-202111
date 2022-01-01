@@ -466,7 +466,7 @@ paths:
           }
         ```
         
-        ex3: **POST /members?memNo=33333  ( 查無資料 )**
+        ex3: **DELETE /members?memNo=33333  ( 查無資料 )**
         ```
         [response 404]:
           { 
