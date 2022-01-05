@@ -20,6 +20,7 @@ exports.createToken = (req,res,next)=>{
         if(err){
             console.error(err);
             res.status(500).json({ "message": "Server Internal Error."});
+            return;
         };
         req.token = token;
         next();
