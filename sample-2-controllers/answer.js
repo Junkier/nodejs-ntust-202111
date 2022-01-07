@@ -40,11 +40,11 @@ app.use( bodyParser.urlencoded( {
 // Use Session
 app.use(session({
     // store : new redisStore({ client: redisClient}),
-    secret : "c90dis90#" ,
-    resave : true,
-    saveUninitialized : false,
-    name:"_ntust_tutorial_id",
-    ttl : 24*60*60*1
+    secret : "c90dis90#" , // 加密 session_id (salt)
+    resave : true, // 不論修改 , 回存到 stores 
+    saveUninitialized : false, // 初始化的　session data , 使否存到 stores
+    name:"_ntust_tutorial_id", // cookie name
+    ttl : 24*60*60*1  // session 有效時間
 }))
 
 

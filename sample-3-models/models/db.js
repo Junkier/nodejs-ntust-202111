@@ -6,7 +6,7 @@ mongoose.set("debug",true);
 const connConfig = "mongodb://localhost:27017/tutorial" ;
 
 const conn = mongoose.createConnection(connConfig,{ 
-    poolSize: 5 , 
+    maxPoolSize: 5 , 
     useNewUrlParser: true ,
     useUnifiedTopology: true,
 });
