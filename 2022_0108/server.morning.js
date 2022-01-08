@@ -37,19 +37,21 @@ app.use(bodyParser.urlencoded({
 // 後面才可用 req.session 做資料存取
 // [Session][2] 設定 session middleware
 app.use(session({
-  secret : "c90dis90#" ,
-  resave : true,
-  saveUninitialized : false,
-  name   : "_ntust_tutorial_id",
-  ttl    : 24*60*60*1
+  // store : new redisStore({ client : redisClient }),  // session 資料存放的地方
+  secret : "c90dis90#" ,  // session 資料加密使用
+  resave : true,          // 不論修改 , 是否要回存到 store 上
+  saveUninitialized : false, // 初始化的 session , 是否要存到 store 上
+  name   : "_ntust_tutorial_id",  // cookie 的 key 值
+  ttl    : 24*60*60*1             // session 資料有效時間
+  // name   : "_testqq_abcd",
 }));
 //////////////////////////////////////////
 
 ////// 登入驗證
 // V 1. 加入 login 頁面
-// 2. POST /auth API 驗證 + 紀錄資料到 session 上
-// 3. GET /logout 登出 API 
-// 4. 加入 登入驗證 middleware (isUserLogined)
+// V 2. POST /auth API 驗證 + 紀錄資料到 session 上
+// V 3. 加入 登入驗證 middleware (isUserLogined)
+// 4. GET /logout 登出 API 
 
 
 // 監測 session 的 middleware 
@@ -63,6 +65,14 @@ app.use((req,res,next)=>{
 app.get("/login" , (req,res)=>{
   res.render("login.html");
 });
+
+// 登出 API 
+app.get("/logout",(req,res)=>{
+  req.session.destroy(); // 刪掉 session 物件資料
+  res.clearCookie("_ntust_tutorial_id"); // 刪掉 cookie 的 key-value pair
+  res.redirect("/login"); // 導入到 /login 頁面
+});
+
 
 
 app.get("/" , 
