@@ -21,6 +21,8 @@ let isTokenValid = (req,res,next) => {
   };
 };
 
+////////////////////////////////////
+
 // 1. 檢查 account / passwd 是否存在
 let isAccountAndPasswdExist = (req,res,next) => {
   // 檢查 payload (Form data , req.body)

@@ -60,11 +60,22 @@ app.get("/" ,
   // [Session][4] 加入 登入驗證判斷 middleware
   (req,res,next)=>{  // 是否登入驗證
     console.log(req.session);
-    if(req.session.userInfo && req.session.userInfo.isLogined === true){
-      next();
-    }else{
-      res.send("您尚未登入！！！");
+
+    if(!req.session.userInfo || req.session.userInfo.isLogined === false){
+      // res.send("您尚未登入!!!");
+      res.redirect("/login");
+      return;
     };
+
+    next();
+      // res.send("您尚未登入！！！");
+
+    // 改成 error first 
+    // if(req.session.userInfo && req.session.userInfo.isLogined === true){
+    //   next();
+    // }else{
+    //   res.send("您尚未登入！！！");
+    // };
   },
   (req,res)=>{
     res.render("index.html");
