@@ -13,6 +13,14 @@ const authRouter = require("./router/auth");
 
 const validator = require("./utils/validator");
 
+// [Session 外存][1]
+// 追加 redis 套件 (Node.js 使用)
+const redis = require("redis");
+const redisClient = redis.createClient();  // 產生 redisClient 的連線實例 (Instance)
+
+// [Session 外存][2]
+// 追加 connect-redis 套件 (專門為 express 設計的對接套件)
+const redisStore = require("connect-redis")(session);
 
 //////////////////////////////////////////
 // 設定模板引擎
@@ -37,12 +45,13 @@ app.use(bodyParser.urlencoded({
 // 後面才可用 req.session 做資料存取
 // [Session][2] 設定 session middleware
 app.use(session({
-  // store : new redisStore({ client : redisClient }),  // session 資料存放的地方
-  secret : "c90dis90#" ,  // session 資料加密使用
+  // [Session 外存][3] 設定好 redisStore 
+  store : new redisStore({ client : redisClient }), // session 資料存放的地方
+  secret : "abcd1234" ,  // session 資料加密使用
   resave : true,          // 不論修改 , 是否要回存到 store 上
   saveUninitialized : false, // 初始化的 session , 是否要存到 store 上
   name   : "_ntust_tutorial_id",  // cookie 的 key 值
-  ttl    : 24*60*60*1             // session 資料有效時間
+  ttl    : 24*60*60*1             // session 資料有效時間 (以 s 為單位)
   // name   : "_testqq_abcd",
 }));
 //////////////////////////////////////////
@@ -51,7 +60,7 @@ app.use(session({
 // V 1. 加入 login 頁面
 // V 2. POST /auth API 驗證 + 紀錄資料到 session 上
 // V 3. 加入 登入驗證 middleware (isUserLogined)
-// 4. GET /logout 登出 API 
+// V 4. GET /logout 登出 API 
 
 
 // 監測 session 的 middleware 
