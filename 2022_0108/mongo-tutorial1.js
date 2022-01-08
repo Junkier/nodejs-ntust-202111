@@ -1,5 +1,5 @@
-//// 初步教學
-
+////// 初步教學
+//// 新增 (insert)
 
 // .insertMany 
 // 將 sample-3-models/sample-data/sample2.json 塞入
@@ -11,13 +11,14 @@ db.getCollection('mongo-tutorial').insertMany([{
 }, ... ]);
 // 總共有 7 筆
 
-////////////////////////////////////////////////////////////
-
 // .insert 新增一筆資料
 db.getCollection('mongo-tutorial').insert( { "today" : "星期六" , "weather" : "sunny"} )
 
 // .find 查看 全部資料
 db.getCollection('mongo-tutorial').find({})
+
+////////////////////////////////////////////////////////////
+//// 查詢 (find)
 
 // 有條件的 .find(condition)
 // ex1: category="政治"
@@ -76,3 +77,28 @@ db.getCollection('mongo-tutorial').find( {} ,  { "category" : 1 , "name" : 1 , "
 //     "name" : "屍戰朝鮮",
 //     "score" : 9.0
 // }
+////////////////////////////////////////////////////////////
+//// 更新 (update)
+// ex1: 更新 _id=1234567 的資料 , 欄位為 score=8.1 , category=其他_QQQQ
+db.getCollection('mongo-tutorial').updateOne(
+    { "_id"  : "1234567" } , 
+    { "$set" : {
+         "score" :8.1,
+         "category" : "其他_QQQQ"  
+      } 
+    } 
+)
+
+// ex2: 更新 category=政治 多組資料 , 欄位為 age=100 , math_score=123 , message=卡卡的
+db.getCollection('mongo-tutorial').updateMany(
+    { "category"  : "政治" } , 
+    { "$set" : {
+         "age" : 100,
+         "math_score" : 123,
+         "message" : "卡卡的~"
+      } 
+    } 
+)
+
+// 有欄位 -> update value 值 ; 沒有欄位 -> 新增 key-value pair 
+
