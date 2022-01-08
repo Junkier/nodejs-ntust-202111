@@ -11,6 +11,8 @@ const portNum = 8088;
 const dramasRouter = require("./router/dramas.controllers");
 const authRouter = require("./router/auth");
 
+const validator = require("./utils/validator");
+
 
 //////////////////////////////////////////
 // 設定模板引擎
@@ -50,6 +52,13 @@ app.use(session({
 // 4. 加入 登入驗證 middleware (isUserLogined)
 
 
+// 監測 session 的 middleware 
+app.use((req,res,next)=>{
+  console.log(req.session);
+  next();
+});
+
+
 // 加入 login 頁面
 app.get("/login" , (req,res)=>{
   res.render("login.html");
@@ -58,38 +67,43 @@ app.get("/login" , (req,res)=>{
 
 app.get("/" , 
   // [Session][4] 加入 登入驗證判斷 middleware
-  (req,res,next)=>{  // 是否登入驗證
-    console.log(req.session);
 
-    if(!req.session.userInfo || req.session.userInfo.isLogined === false){
-      // res.send("您尚未登入!!!");
-      res.redirect("/login");
-      return;
-    };
+  validator.isUserLogined,
+  // (req,res,next)=>{  // 是否登入驗證
+  //   // console.log(req.session);
 
-    next();
-      // res.send("您尚未登入！！！");
+  //   if(!req.session.userInfo || req.session.userInfo.isLogined === false){
+  //     // res.send("您尚未登入!!!");
+  //     res.redirect("/login");
+  //     return;
+  //   };
 
-    // 改成 error first 
-    // if(req.session.userInfo && req.session.userInfo.isLogined === true){
-    //   next();
-    // }else{
-    //   res.send("您尚未登入！！！");
-    // };
-  },
+  //   next();
+  //     // res.send("您尚未登入！！！");
+
+  //   // 改成 error first 
+  //   // if(req.session.userInfo && req.session.userInfo.isLogined === true){
+  //   //   next();
+  //   // }else{
+  //   //   res.send("您尚未登入！！！");
+  //   // };
+  // },
   (req,res)=>{
     res.render("index.html");
   }
 );
 
-app.use("/dramas",dramasRouter);
+app.use("/dramas", validator.isUserLogined, dramasRouter);
 app.use("/auth" , authRouter);
 
 
 // 關於我們 頁面
-app.get("/about/us",(req,res)=>{
-  res.render("aboutus.html");
-});
+app.get("/about/us",
+  validator.isUserLogined,
+  (req,res)=>{
+    res.render("aboutus.html");
+  }
+);
 
 
 app.listen(portNum , ()=>{

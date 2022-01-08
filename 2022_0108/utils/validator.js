@@ -57,11 +57,21 @@ let setSessionInfo = (req,res,next)=>{
 };
 
 
+// 檢查是否有登入驗證
+let isUserLogined = (req,res,next)=>{  // 是否登入驗證
+    if(!req.session.userInfo || req.session.userInfo.isLogined === false){
+      res.redirect("/login");
+      return;
+    };
+    next();
+};
+
 // 一定要 module.exports 出去 
 module.exports = {
     "isTokenExist" : isTokenExist, // value 為 middleware 本人 
     "isTokenValid" : isTokenValid,
     "isAccountAndPasswdExist" : isAccountAndPasswdExist,
     "isUserValid" : isUserValid ,
-    "setSessionInfo" : setSessionInfo
+    "setSessionInfo" : setSessionInfo,
+    "isUserLogined" : isUserLogined
 };

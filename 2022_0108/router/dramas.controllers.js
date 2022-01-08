@@ -8,7 +8,6 @@ const validator = require("../utils/validator");
 //     "isTokenValid" : isTokenValid  
 // }
 
-
 let readFilePromise = (dataPath)=>{
   return new Promise( (resolve , reject) =>{
     fs.readFile(dataPath,"utf8" , (err,data)=>{
@@ -17,6 +16,13 @@ let readFilePromise = (dataPath)=>{
     });
   });
 };
+
+
+// isUserLogined 外移到 server.morning.js 上面
+
+
+// router.use()
+// router.use(isUserLogined);
 
 // /dramas/page --> 回傳 dramas.html
 router.get("/page" , (req,res)=>{
