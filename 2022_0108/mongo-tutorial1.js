@@ -120,3 +120,51 @@ db.getCollection('mongo-tutorial').find({
        "$lte" : 9    
     }
 })
+
+
+
+//// 小試身手#3 
+// 1.  建立 tutorial-2 的 collection , 將 sample3.json 資料打入
+db.getCollection('tutorial-2').insertMany([{
+    "dramaId" : "1001",
+    "category" : "犯罪",
+    "name" : "絕命毒師",
+    "score" : 10.0
+},
+{
+    "dramaId" : "1002",
+    "category" : "殭屍",
+    "name" : "屍戰朝鮮",
+    "score" : 9.0
+},
+...
+])
+
+// 2. find score >=8 && category=政治
+//    顯示 {name,dramaId} 欄位
+db.getCollection('tutorial-2').find(
+  {
+    "score" : {
+      "$gte" : 8   
+    },
+    "category" : "政治"
+  },
+  {
+     "name" : 1 ,
+     "dramaId" : 1 , 
+     "_id" : 0
+  }
+)
+
+// 3. update category=犯罪 資料 => 新增 remark="good!"
+db.getCollection('tutorial-2').updateMany(
+    { "category" : "犯罪"} , 
+    { "$set" : { "remark" : "good!" } }
+)
+
+// 4. delete name in ["QQQQ","SSS","ABCD"] 的資料
+db.getCollection('tutorial-2').deleteMany({ 
+    "name" : {
+      "$in" : ["QQQQ","SSS","ABCD"]    
+    }
+})
