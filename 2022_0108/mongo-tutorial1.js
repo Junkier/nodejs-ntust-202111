@@ -102,3 +102,10 @@ db.getCollection('mongo-tutorial').updateMany(
 
 // 有欄位 -> update value 值 ; 沒有欄位 -> 新增 key-value pair 
 
+////////////////////////////////////////////////////////////
+//// 刪除 (delete)
+// ex1: 刪除一筆
+db.getCollection('mongo-tutorial').deleteOne({ "name" : "Keven" })
+
+// ex2: 刪除多筆
+db.getCollection('mongo-tutorial').deleteMany({ "name" : "Keven" })
