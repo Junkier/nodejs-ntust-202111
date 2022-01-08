@@ -1,0 +1,14 @@
+# 顯示所有 key 
+keys *
+
+# 設定 key-value pair
+set name jeff
+set age 18
+
+# 顯示特定 key-value pair
+get name 
+get age 
+
+# 刪除特定 key-value pair
+del name 
+del age
