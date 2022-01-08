@@ -109,3 +109,14 @@ db.getCollection('mongo-tutorial').deleteOne({ "name" : "Keven" })
 
 // ex2: 刪除多筆
 db.getCollection('mongo-tutorial').deleteMany({ "name" : "Keven" })
+
+
+////////////////////////////////////////////////////////////
+// [Bonus]
+// find score > 8 && score <=9 的資料
+db.getCollection('mongo-tutorial').find({
+    "score" : {
+       "$gt" : 8,
+       "$lte" : 9    
+    }
+})
