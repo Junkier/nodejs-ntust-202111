@@ -162,7 +162,7 @@ db.getCollection('tutorial-2').updateMany(
     { "$set" : { "remark" : "good!" } }
 )
 
-// 4. delete name in ["QQQQ","SSS","ABCD"] 的資料
+// 4. delete name in ["QQQQ","SSS","ABCD"] 的資料 
 db.getCollection('tutorial-2').deleteMany({ 
     "name" : {
       "$in" : ["QQQQ","SSS","ABCD"]    
