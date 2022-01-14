@@ -31,9 +31,7 @@ let isToDoIdInBody = (req,res,next)=>{
 var router = express.Router();
 
 
-
-// [Code Review]
-// 需重新設計 , 目前不放入 swagger 中！！！
+// 目前不放入 swagger 中！！！
 
 // 照片取得
 router.get("/",

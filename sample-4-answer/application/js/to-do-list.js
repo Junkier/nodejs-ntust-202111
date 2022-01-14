@@ -77,7 +77,7 @@ function createTable(data){
                     <th scope="row">${d.to_do_id}</th>
                     <td>${d.subject}</td>
                     <td>${d.reserved_time}</td>
-                    <td><a href="/to-do-list/detail/${d.to_do_id}">${d.brief}</a></td>
+                    <td><a href="/to-do-list/page/detail${d.to_do_id ? `?to_do_id=${d.to_do_id}` : ""}">${d.brief}</a></td>
                     <td>
                         ${(new Array(d.level)).fill(0).map(function(_){ return `<i class="fas fa-bell bell-icon"></i>`}).join("\n")}
                     </td>

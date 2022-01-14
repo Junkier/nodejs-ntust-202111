@@ -13,25 +13,23 @@ let isAccountAndPasswdExist = (req,res,next)=>{
 
 };
 
-let isUserValid = (req,res,next) => {
-    model.members
-         .findOne({
-             account : req.body.account,
-             passwd  : req.body.passwd
-         })
-         .then(r=>{
-             if(!r){
-                res.status(400).json({ message : "帳號或密碼 有誤 !"});
-                return;
-             };
-             next();
-            
-         })
-         .catch(err=>{
-             console.error(err);
-             res.status(500).json({message:"Server internal fault."});
-         });
+let isUserValid = async (req,res,next) => {
+    try{
+        let r = await model.members
+                           .findOne({
+                                account : req.body.account,
+                                passwd  : req.body.passwd
+                           });
+        if(!r){
+            res.status(400).json({ message : "帳號或密碼 有誤 !"});
+            return;
+        };
+        next();
 
+    } catch(err){
+        console.error(err);
+        res.status(500).json({message:"Server internal fault."});
+    };
 };
 
 

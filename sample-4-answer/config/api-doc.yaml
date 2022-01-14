@@ -1,16 +1,15 @@
 openapi: 3.0.1
 info:
-  title: Tutorial API system
-  description: This is for tutorial backend api.
+  title: To-Do-List API system
+  description: 本實作練習為「Node.js 後端網站架設實作坊」最終練習 , 完成下列 API 開發即可。
   version: 1.0.0
 servers:
-  - url: 'http://130.211.247.58:8088'
   - url: 'http://localhost:8088'
 tags:
   - name: auth
     description: 會員驗證
-  - name: users
-    description: 會員資料
+  - name: logout
+    description: 登出機制
   - name: to-do-list
     description: To-Do-List 系統
 
@@ -22,8 +21,7 @@ paths:
         - auth
       summary: 會員登入驗證
       description: |
-        使用於會員登入，目前可使用的帳密<br>
-        帳號：jeff / 密碼：testqq
+        使用於會員登入<br>目前可使用的帳密,可參考 **misc/members-sample.json**
       requestBody:
         required: true
         content:
@@ -69,55 +67,24 @@ paths:
         500:
           $ref: "#/components/responses/500ServerError"
       
-  /users:
-    post:
+  /logout:
+    get:
       tags:
-        - users
-      summary: 新增 會員資料
+        - logout
+      summary: 將該會員登出
       description: |
-        使用於創建會員帳密（暫時無需使用，可略）
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                account:         
-                  type: string
-                  description: 會員帳號
-                  example: "jeff"
-                passwd:   
-                  type: string
-                  description: 會員密碼
-                  example: "testqq"
+        清除掉 cookie & session , 並將使用者跳轉至登入畫面
                   
       responses:
-        200:
+        302:
           description: successful operation
-          content:
-            application/json:
-              examples:
-                ok1:
-                  summary: ok
-                  value:
-                    message: ok! 您現在可使用該帳號登入.
+          headers:
+            Location:
+              schema:
+                type: integer
+              description: 跳轉位置 -> /login
+            
                     
-                    
-        400:
-          description: Bad requests
-          content:
-            application/json:
-              examples:
-                Failed1:
-                  summary: 帳號 / 密碼 欄位有遺漏
-                  value:
-                    message: 帳號或密碼 欄位有遺漏 !  
-                Failed2:
-                  summary: 帳號重複
-                  value:
-                    message: 該帳號已存在！
-                 
                     
         500:
           $ref: "#/components/responses/500ServerError"
@@ -232,7 +199,7 @@ paths:
                       modified_time: 修改時間
                       reserved_time: 預約時間
                       subject: 主題
-                      attachments: 照片檔連結 (目前尚未開放 ,可忽略)
+                      attachments: 照片檔連結 (目前尚未開放 ,保持格式即可)
                     
                 ok3:
                   summary: 無資料
@@ -246,50 +213,75 @@ paths:
       
         500:
           $ref: "#/components/responses/500ServerError"
-    put:
+    post:
       tags:
         - to-do-list
       summary: 新增 / 更新 待辦事項 資料細項
       description: |
-        該 API 可完成 新增 or 更新 待辦事項 <br>
-        
-        - 透過 <b>to_do_id 比對</b> 或 <b>mode</b> 選擇 
-        - 有資料 -> 更新資料 ; 無資料 -> 新增一筆資料
-        - 需要更新的資料 , 再帶到後端即可
+        <h3>該 API 可完成 新增 or 更新 待辦事項 </h3>
+        <h4>
+        - 預期前端動作 
+          - 更新 -> 使用該資料的 to_do_id , 搭配 payload 做更新
+          
+          - 新增 -> 透過 GET /to-do-list/the-newest-id 取得最新的 to_do_id, 搭配 payload 做更新
+          
+        - 預期後端動作 
+          - to_do_id 比對有資料 -> 更新資料
+          
+          - to_do_id 比對無資料 -> 新增一筆資料
+        </h4>
         ---
-        ex1: 更新 subject=下午茶沒時間買 + level=8
+        <h3>ex1: 更新資料 POST /to-do-list/detail/10001</h3>
         ```
+        [Payload]
         {
-           "subject" : "下午茶沒時間買",
-           "level"   : 9
-        } 
+          "subject":"下午茶",
+          "reserved_time":"2020-10-25 13:00",
+          "modified_time":"2022-01-14 15:40:05",
+          "brief":"京盛宇限定ZZ",
+          "level":5,
+          "author":"Leo",
+          "content":"QQ"
+        }
+        
+        [Response]
+        {
+          "message": "ok.",
+          "affectedRows": 1
+        }
         ```
         
-        ex2: 更新 author=傑夫 + brief=未知 + reserved_time="2021-06-09 12:04"
+        <h3>ex2: 新增資料 POST /to-do-list/detail/12345</h3>
         ```
+        [Payload]
         {
-           "subject"         : "下午茶沒時間買",
-           "brief"           : "未知",
-           "reserved_time"   : "2021-06-09 12:04"
-        } 
+          author: "阿麟"
+          brief: " 我是新增～～～"
+          content: ""
+          level: 2
+          modified_time: "2022-01-14 15:43:16"
+          reserved_time: "2022-01-14 15:43"
+          subject: "ZZZ"
+          attachments: [null, null, null, null, null, null] 
+          // ( attachments 為上傳照片檔案用 , 由前端自動產生 , 本作業尚未開放 可忽略不管)
+        }
+        
+        [Response]
+        {
+          "message": "ok.",
+          "affectedRows": 1
+        }
         ```
+        
         
       parameters:
         - in: path
           name: to_do_id
           required: true
-          description: id 編號
+          description: id 編號 <br>資料庫有資料時, 會做 update , 無資料則會新增一筆
           schema:
             type: string
             example: "10001"
-        - in: query
-          name: mode
-          required: false
-          description: 新增 / 更新 模式 , 未輸入時會透過 to_do_id 進資料庫比對
-          schema:
-            type: string
-            enum: ["edit","create"]
-            example: "edit"
             
       requestBody:
         required: true
@@ -390,7 +382,7 @@ paths:
         - to-do-list
       summary: 取得 待辦事項 最新的 id 編號
       description: |
-        當編輯一筆新的 待辦事項 時 , 須透過該 API <br>取得目前資料庫最新的 to_do_id
+        當新增一筆新的 待辦事項 時 , 前端會透過該 API <br>取得目前資料庫最新的 to_do_id
         
       
       responses:

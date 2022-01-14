@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" />
+
+    <style>
+        body{
+            background-color: #f8f8d3;
+        }
+
+        .login {
+            margin-top:8%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-content:start;
+            height: 100%;
+        }
+
+        .login form {
+            max-width: 380px;
+            width: 90%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 0.8rem;
+            color: #505e6c;
+            box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login .illustration {
+            text-align: center;
+            padding: 0 0 20px;
+            font-size: 100px;
+            color : #64a467 !important
+            /* color: rgb(9, 111, 206); */
+        }
+
+        .login form .form-control {
+            background: #f7f9fc;
+            border: none;
+            border-bottom: 1px solid #dfe7f1;
+            border-radius: 0;
+            box-shadow: none;
+            outline: none;
+            color: inherit;
+            text-indent: 8px;
+            height: 42px;
+        }
+
+        .login form .btn-primary {
+            background: rgb(9, 111, 206);
+            border: none;
+            border-radius: 4px;
+            padding: 11px;
+            box-shadow: none;
+            margin-top: 26px;
+            text-shadow: none;
+            outline: none !important;
+        }
+
+        .login form .btn-primary:hover,
+        .login form .btn-primary:active {
+            background: rgb(19, 130, 233);
+        }
+
+        .login form .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        .login form .wrong {
+            display: block;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #d4304c;
+            opacity: 0.9;
+            text-decoration: none;
+        }
+
+        .login form .wrong:hover,
+        .login form .wrong:active {
+            opacity: 1;
+            text-decoration: none;
+        }
+
+        .form-control {
+            padding-left: 2.4rem;
+        }
+
+        .form-control-feedback {
+            position: absolute;
+            font-size: 1.2rem;
+            z-index: 2;
+            display: block;
+            width: 2.4rem;
+            height: 2.4rem;
+            line-height: 2.6rem;
+            text-align: center;
+            pointer-events: none;
+            color: rgb(157, 161, 170);
+        }
+        
+    </style>
+
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div class="login d-flex justify-content-center">
+        <form method="post" >
+            <div class="illustration"><i class="far fa-user-circle"></i></div>
+
+            <div class="form-group">
+                <span class="far fa-envelope form-control-feedback"></span>
+                <input id="account" type="text" class="form-control" @input="changeErrMsgState"
+                        placeholder="帳號" v-model="userAccount">
+            </div>
+            <div class="form-group">
+                <span class="fas fa-unlock-alt form-control-feedback"></span>
+                <input id="passwd" type="password" class="form-control" @input="changeErrMsgState"
+                        placeholder="密碼" v-model="userPasswd">
+            </div>
+
+            <div class="form-group">
+                <a name="" id="login-btn" 
+                style="background-color: #64a467 !important"
+                    class="btn btn-primary btn-block" href="#" 
+                    role="button" >Log In</a>
+            </div>
+            <span href="#" class="wrong" id="err-message" style="height:21px;"></span>
+        </form>
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+
+    <script type="text/javascript" src="js/login.js"></script>
+</body>
+
+</html>

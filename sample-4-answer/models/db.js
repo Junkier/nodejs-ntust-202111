@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const host = process.env.MONGODB_HOST || "test_mongo";
+const host = process.env.MONGODB_HOST || "localhost";
 
 const connConfig = `mongodb://${host}:27017/tutorial` ;
 

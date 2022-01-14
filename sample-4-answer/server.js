@@ -10,7 +10,7 @@ const session     = require("express-session");
 const redis       = require("redis");
 const redisStore  = require("connect-redis")(session);
 const redisClient = redis.createClient({
-  host     : process.env.REDIS_HOST || "test_redis",
+  host     : process.env.REDIS_HOST || "localhost",
   port     : 6379
 });
 
@@ -19,7 +19,6 @@ const bodyParser   = require("body-parser");
 
 
 const authRouter     = require("./router/auth");
-const usersRouter    = require("./router/users");
 const dramasRouter   = require("./router/dramas");
 const toDoListRouter = require("./router/to-do-list");
 const imagesRouter   = require("./router/images");
@@ -74,7 +73,6 @@ app.get("/",(req,res)=>{
 });
 
 
-
 app.get("/login",(req,res)=>{
   res.render("login.html");
 });
@@ -87,21 +85,15 @@ app.get("/logout",(req,res)=>{
 
 
 app.use("/auth",authRouter);
-app.use("/users",usersRouter);
-
-
 app.use(`/api-docs`,apiDocs);
-
 
 app.use(utils.isUserLogined);
 
-
-app.use("/dramas",dramasRouter);
 app.use("/to-do-list",toDoListRouter);
 app.use("/images",imagesRouter);
+
+app.use("/dramas",dramasRouter);
 app.use("/about", aboutRouter);
-
-
 
 
 app.get(["/","/welcome"],
