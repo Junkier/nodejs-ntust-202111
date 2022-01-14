@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 
+const apiDocs       = require("./router/api-docs");
 const toDoListRouter = require("./router/to-do-list");
 
 
@@ -15,7 +16,7 @@ const toDoListRouter = require("./router/to-do-list");
 // app.use("/about", aboutRouter);
 ////////////
 
-
+app.use(`/api-docs`,apiDocs);
 app.use("/to-do-list",toDoListRouter);
 
 
@@ -23,6 +24,12 @@ app.use("/to-do-list",toDoListRouter);
 app.get("/",(req,res)=>{
   res.send("Hello world!");
 });
+
+
+app.use((req,res)=>{
+  res.status(404).send("API 尚未開發！");
+});
+
 
 
 app.listen(8088,function(){

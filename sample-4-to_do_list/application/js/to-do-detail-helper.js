@@ -1,5 +1,7 @@
 $(function(){
 
+    LEVEL_SIGNAL=0;
+
     init();
 
     getImages();
@@ -53,7 +55,13 @@ function changeImageEvent(e){
 };
 
 function getImages(){
-    var toDoId = $("#to-do-id").val();
+
+    // Create or update
+    var updateMode = location.href.split("?").length === 2;
+    if(!updateMode) return;
+
+    var toDoId = $("#to-do-id").val() || location.href.split("=").slice(-1)[0];
+
     axios.get("/images?to_do_id="+toDoId)
          .then(function(response){
              var data = response.data.result.attachments;
@@ -212,23 +220,22 @@ function init(){
 
 
     //// Level signal
-    var level = 0;
     $("#level i").click(function(){
 
         $("#level i").css({"font-weight":400});
 
         var value = Number($(this).attr("index")) +1;
 
-        if(level === value) return;
+        if(LEVEL_SIGNAL === value) return;
 
         $("#level i").slice(0,value).css({"font-weight":600});
-        level = value;
+        LEVEL_SIGNAL = value;
     });
 
     // init level signal
     var initLevel = Number($("#level").attr("value"));
     $("#level i").slice(0,initLevel).css({"font-weight":600});
-    level = initLevel;
+    LEVEL_SIGNAL = initLevel;
 
 
     //// Creating time 
@@ -244,11 +251,7 @@ function init(){
 
 
     // Create or update
-    var toDoId = location.href.split("/").slice(-1)[0] ;
-
-    var isCreatedMode = toDoId === "create";
-
-
+    var isCreatedMode = location.href.split("?").length === 1;
     if(isCreatedMode){
         // 取得最新的 to-do-id
         axios.get("/to-do-list/the-newest-id")

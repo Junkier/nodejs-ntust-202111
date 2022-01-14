@@ -10,6 +10,11 @@ $(function(){
         if(doubleCheck) deleteToDoItem(to_do_id);
     });
 
+
+    var updateMode = location.href.split("?").length === 2;
+
+    if(updateMode) getToDoDetail();
+
 });
 
 
@@ -64,29 +69,58 @@ function checkPayloadFormat(payload){
 };
 
 
+function getToDoDetail(){
+
+    var to_do_id  = location.href.split("=")[1];
+    
+    // 設定上 DOM 資料
+    $("#title-to-do-id").text(`${to_do_id} 細項`);
+    $("#to-do-id").val(to_do_id);
+
+    axios.get("/to-do-list/detail/"+to_do_id)
+         .then(function(response){
+             var data = response.data.result;
+             if(!data) return;
+
+             $("#subject").val(data["subject"]);
+             $("#reservation-time").val(data["reserved_time"]);
+             $("#brief").val(data["brief"]);
+
+             $("#level i").slice(0,data["level"]).css({"font-weight":600});
+             LEVEL_SIGNAL = data["level"];
+            
+             $("#author").val(data["author"]);
+             $("#content").val(data["content"]);
+         })
+         .catch(function(err){
+            if(err.response && err.response.status === 404){
+                alert("找不到該 API !");
+                return;
+            };
+         });
+};
+
+
 
 function updateToDoItem(){
     var payload = getPayload();
 
-    var toDoId = location.href.split("/").slice(-1)[0] ;
-
-    var mode = toDoId === "create" ? "create" : "edit";
-
-
-    if(mode === "create") payload["attachments"] = [ 
-        null, null, null, null, null, null
-    ];
-
+    var isCreatedMode = location.href.split("?").length === 1;
+    var mode = isCreatedMode ? "create" : "edit";
 
     var isValid = checkPayloadFormat(payload);
 
     if(!isValid) return;
 
-    axios.put("/to-do-list/detail/"+payload["to_do_id"] + "?mode="+mode , payload)
+    if(isCreatedMode) payload["attachments"] = [ 
+        null, null, null, null, null, null
+    ];
+
+    axios.post("/to-do-list/detail/"+payload["to_do_id"], payload)
          .then(function(response){
              if(response.data.message === "ok."){
                  alert("更新完成！");
-                 location.href = "/to-do-list/page";
+                 location.href = "/to-do-list/page/list";
              };
          })
          .catch(function(err){
@@ -105,7 +139,7 @@ function deleteToDoItem(to_do_id){
          .then(function(response){
              if(response.data.message === "ok."){
                  alert("刪除完成！");
-                 location.href = "/to-do-list/page";
+                 location.href = "/to-do-list/page/list";
              };
          })
          .catch(function(err){

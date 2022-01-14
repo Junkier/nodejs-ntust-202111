@@ -13,23 +13,32 @@ const multer = Multer({
 
 const model   = require("../models");
 
+const { isToDoIdInQuery } = require("../utils");
+
 
 let isFileExist = (req,res,next)=>{
-    if(!req.file) res.status(400).json({message:"Lacking of image files."});
+    if(!req.file) res.status(400).json({message:"缺少 images 檔案！"});
     else next();
 };
 
 
+let isToDoIdInBody = (req,res,next)=>{
+    if(!req.body.to_do_id) res.status(400).json({message:"body 缺少 to_do_id 參數！"});
+    else next();
+};
+
 
 var router = express.Router();
 
+// 目前不放入 swagger 中！！！
 
 // 照片取得
 router.get("/",
+    isToDoIdInQuery,    
     (req,res)=>{
         let to_do_id = req.query.to_do_id;
         model.toDoList
-             .findOne({to_do_id},{to_do_id:1, attachments : 1})
+             .findOne({to_do_id},{to_do_id:1, attachments : 1 , _id :0})
              .then(result=>{
                 res.json({result});
              })
@@ -44,6 +53,7 @@ router.get("/",
 
 // 照片上傳
 router.post("/",
+    isToDoIdInQuery,
     multer.single("attachment"),
     isFileExist,
     async (req,res,next)=>{
@@ -70,6 +80,16 @@ router.post("/",
         let to_do_id = req.query.to_do_id;
         let index    = req.query.index;
 
+        if(!index){
+            let result = await model.toDoList.findOne({ to_do_id, },{ attachments : 1});
+
+            let rawIndexs = result.attachments.map((v,i)=>({v,i}))
+                                       .filter(ele=>!ele.v);
+
+            index = rawIndexs.length >0 ? rawIndexs[0].i : 1;
+        };
+
+
         // 5. 照片路徑更新至 mongoDB 
         // edit mode
         await model.toDoList.updateOne({
@@ -84,10 +104,12 @@ router.post("/",
 
 // 照片刪除
 router.delete("/",
+    isToDoIdInBody,
     async (req,res)=>{
 
         // 1. 建立檔案 絕對路徑
-        let file = path.join(__dirname,"../","application",req.body.src);
+        let src = req.body.src || "images";
+        let file = path.join(__dirname,"../","application",src);
 
         // 2. 移除 application 裡的照片檔案
         if(fs.existsSync(file)) fs.unlinkSync(file);
