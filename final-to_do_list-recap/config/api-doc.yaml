@@ -1,0 +1,442 @@
+openapi: 3.0.1
+info:
+  title: To-Do-List API system
+  description: 本實作練習為「Node.js 後端網站架設實作坊」最終練習 , 完成下列 API 開發即可。
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8088'
+tags:
+  - name: auth
+    description: 會員驗證
+  - name: logout
+    description: 登出機制
+  - name: to-do-list
+    description: To-Do-List 系統
+
+paths:
+
+  /auth:
+    post:
+      tags:
+        - auth
+      summary: 會員登入驗證
+      description: |
+        使用於會員登入<br>目前可使用的帳密,可參考 **misc/members-sample.json**
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:         
+                  type: string
+                  description: 會員帳號
+                  example: "jeff"
+                passwd:   
+                  type: string
+                  description: 會員密碼
+                  example: "testqq"
+                  
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    message: ok. 您現在可存取 API.
+                    redirect: /
+                    
+        400:
+          description: Bad requests
+          content:
+            application/json:
+              examples:
+                Failed1:
+                  summary: 帳號 / 密碼 欄位有遺漏
+                  value:
+                    message: 帳號或密碼 欄位有遺漏 !  
+                Failed2:
+                  summary: 帳號 / 密碼 有誤
+                  value:
+                    message: 帳號或密碼 有誤 !
+                    
+        500:
+          $ref: "#/components/responses/500ServerError"
+      
+  /logout:
+    get:
+      tags:
+        - logout
+      summary: 將該會員登出
+      description: |
+        清除掉 cookie & session , 並將使用者跳轉至登入畫面
+                  
+      responses:
+        302:
+          description: successful operation
+          headers:
+            Location:
+              schema:
+                type: integer
+              description: 跳轉位置 -> /login
+            
+                    
+                    
+        500:
+          $ref: "#/components/responses/500ServerError"
+  
+  /to-do-list/list:
+    get:
+      tags:
+        - to-do-list
+      summary: 取得 待辦事項 清單
+      
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    result:
+                      - to_do_id: '10001'
+                        subject: 晨會
+                        reserved_time: '2020-10-24 09:00'
+                        brief: 午餐負責人
+                        level: 3
+                        author: 傑夫
+                      - to_do_id: '10002'
+                        subject: 下午茶
+                        reserved_time: '2019-10-09 12:28'
+                        brief: 50嵐 VS 可不可熟成
+                        level: 3
+                        author: Leo
+                      - to_do_id: '10003'
+                        subject: QQQA
+                        reserved_time: '2020-10-24 16:20'
+                        brief: this.is.a.book
+                        level: 9
+                        author: 傑夫
+                      - explanation: "// 欄位說明"
+                        to_do_id: id編號
+                        subject: 主題
+                        reserved_time: 預約時間
+                        brief: 簡介
+                        level: 重要程度
+                        author: 撰寫者
+                ok2:
+                  summary: 無資料
+                  value:
+                    result: []
+                      
+        401:
+          $ref: '#/components/responses/401NotLogined'
+        500:
+          $ref: "#/components/responses/500ServerError"
+      
+  /to-do-list/detail/{to_do_id}:
+    get:
+      tags:
+        - to-do-list
+      summary: 取得 待辦事項 資料細項
+      parameters:
+        - in: path
+          name: to_do_id
+          required: true
+          description: id 編號
+          schema:
+            type: string
+            example: "10001"
+        - in: query
+          name: type
+          required: true
+          description: 回傳資料格式 , 目前僅支援 <b>json</b>
+          schema:
+            type: string
+            enum: ["json"]
+            example: "json"
+      
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    result:
+                      to_do_id: '10001'
+                      author: jeff
+                      brief: '50嵐跟可不可 , 到底要哪個'
+                      content: '50嵐外帶20杯 7折 , 可不可每杯折5元 , 可是我想喝清心 , 有人要跳巢的嗎！？'
+                      level: 9
+                      modified_time: '2021-02-09 11:21:37'
+                      reserved_time: '2021-06-09 12:04'
+                      subject: 下午茶Q哩
+                      attachments:
+                        - null
+                        - null
+                        - null
+                        - null
+                        - null
+                        - null
+                ok2:
+                  summary: ok (欄位說明)
+                  value:
+                    result:
+                      to_do_id: id 編號
+                      author: 撰寫者
+                      brief: 簡介
+                      content: 內容
+                      level: 重要程度 (範圍從 0 ~ 10)
+                      modified_time: 修改時間
+                      reserved_time: 預約時間
+                      subject: 主題
+                      attachments: 照片檔連結 (目前尚未開放 ,保持格式即可)
+                    
+                ok3:
+                  summary: 無資料
+                  value:
+                    result: null
+                    
+                      
+        401:
+          $ref: '#/components/responses/401NotLogined'
+          
+      
+        500:
+          $ref: "#/components/responses/500ServerError"
+    post:
+      tags:
+        - to-do-list
+      summary: 新增 / 更新 待辦事項 資料細項
+      description: |
+        <h3>該 API 可完成 新增 or 更新 待辦事項 </h3>
+        <h4>
+        - 預期前端動作 
+          - 更新 -> 使用該資料的 to_do_id , 搭配 payload 做更新
+          
+          - 新增 -> 透過 GET /to-do-list/the-newest-id 取得最新的 to_do_id, 搭配 payload 做更新
+          
+        - 預期後端動作 
+          - to_do_id 比對有資料 -> 更新資料
+          
+          - to_do_id 比對無資料 -> 新增一筆資料
+        </h4>
+        ---
+        <h3>ex1: 更新資料 POST /to-do-list/detail/10001</h3>
+        ```
+        [Payload]
+        {
+          "subject":"下午茶",
+          "reserved_time":"2020-10-25 13:00",
+          "modified_time":"2022-01-14 15:40:05",
+          "brief":"京盛宇限定ZZ",
+          "level":5,
+          "author":"Leo",
+          "content":"QQ"
+        }
+        
+        [Response]
+        {
+          "message": "ok.",
+          "affectedRows": 1
+        }
+        ```
+        
+        <h3>ex2: 新增資料 POST /to-do-list/detail/12345</h3>
+        ```
+        [Payload]
+        {
+          author: "阿麟"
+          brief: " 我是新增～～～"
+          content: ""
+          level: 2
+          modified_time: "2022-01-14 15:43:16"
+          reserved_time: "2022-01-14 15:43"
+          subject: "ZZZ"
+          attachments: [null, null, null, null, null, null] 
+          // ( attachments 為上傳照片檔案用 , 由前端自動產生 , 本作業尚未開放 可忽略不管)
+        }
+        
+        [Response]
+        {
+          "message": "ok.",
+          "affectedRows": 1
+        }
+        ```
+        
+        
+      parameters:
+        - in: path
+          name: to_do_id
+          required: true
+          description: id 編號 <br>資料庫有資料時, 會做 update , 無資料則會新增一筆
+          schema:
+            type: string
+            example: "10001"
+            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:         
+                  type: string
+                  description: 撰寫者
+                  example: "jeff"
+                brief:         
+                  type: string
+                  description: 簡介
+                  example: "50嵐跟可不可 , 到底要哪個"
+                content:         
+                  type: string
+                  description: 內容
+                  example: "50嵐外帶20杯 7折 , 可不可每杯折5元 , 可是我想喝清心 , 有人要跳巢的嗎！？"
+                level:         
+                  type: number
+                  description: 重要程度 (範圍從 0 ~ 10)
+                  example: 9
+                modified_time:         
+                  type: string
+                  description: 修改時間
+                  example: "2021-02-09 11:21:37"
+                reserved_time:   
+                  type: string
+                  description: 預約時間
+                  example: "2021-06-09 12:04"
+                subject:   
+                  type: string
+                  description: 主題
+                  example: "下午茶哩"
+            
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    message: ok.
+                    affectedRows: 1
+                ok2:
+                  summary: ok (資料未變動 , 無更新)
+                  value:
+                    message: ok.
+                    affectedRows: 0
+              
+                      
+        401:
+          $ref: '#/components/responses/401NotLogined'
+        500:
+          $ref: "#/components/responses/500ServerError"
+    delete:
+      tags:
+        - to-do-list
+      summary: 刪除 待辦事項 資料細項
+      parameters:
+        - in: path
+          name: to_do_id
+          required: true
+          description: id 編號
+          schema:
+            type: string
+            example: "10001"
+      
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    message: ok.
+                    affectedRows: 1
+                ok2:
+                  summary: ok (資料未變動 , 無刪除)
+                  value:
+                    message: ok.
+                    affectedRows: 0
+                      
+        401:
+          $ref: '#/components/responses/401NotLogined'
+        500:
+          $ref: "#/components/responses/500ServerError"
+        
+  /to-do-list/the-newest-id:
+    get:
+      tags:
+        - to-do-list
+      summary: 取得 待辦事項 最新的 id 編號
+      description: |
+        當新增一筆新的 待辦事項 時 , 前端會透過該 API <br>取得目前資料庫最新的 to_do_id
+        
+      
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                ok1:
+                  summary: ok
+                  value:
+                    result: 10007
+          
+        401:
+          $ref: '#/components/responses/401NotLogined'
+        500:
+          $ref: "#/components/responses/500ServerError"
+    
+  
+components:
+  responses:
+    200MessageOk:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "ok"
+           
+    401NotLogined:
+      description: 未登入
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "請先登入!"
+                
+    500ServerError:
+      description: Server 端錯誤
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Server internal fault."
+   
+        
+    
+  
