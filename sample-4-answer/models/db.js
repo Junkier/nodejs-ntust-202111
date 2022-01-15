@@ -8,7 +8,7 @@ const logger = require("log4js").getLogger("DB");
 
 
 const conn = mongoose.createConnection(connConfig,{ 
-    poolSize: 5 , 
+    maxPoolSize: 5 , 
     useNewUrlParser: true ,
     useUnifiedTopology: true,
 });
