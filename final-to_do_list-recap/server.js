@@ -1,9 +1,19 @@
 const express = require('express');
 const app = express();
 
+const hbs = require("hbs");
+const path = require("path");
+
 
 const apiDocs       = require("./router/api-docs");
 const toDoListRouter = require("./router/to-do-list");
+
+// 設定模板引擎 
+app.engine("html" , hbs.__express);
+
+// 設定靜態檔案
+app.set("views" , path.join(__dirname,"application","views"));
+app.use(express.static( path.join(__dirname , "application")));
 
 
 //// Model 部分建立完 , 再開啟即可使用
