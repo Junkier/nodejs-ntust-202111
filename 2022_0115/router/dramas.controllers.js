@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const model = require("../models");  // require 為資料夾的話 , 預設會找 index.js
+// console.log(model);
 
 // /dramas/page --> 回傳 dramas.html
 router.get("/page" , (req,res)=>{
@@ -74,5 +75,17 @@ router.put("/detail/:dramaId", async (req,res)=>{
 
 // 刪除 影集資料
 // DELETE /dramas/detail/:dramaId 
+router.delete("/detail/:dramaId", async (req,res)=>{
+  try{
+    let dramaId = req.params.dramaId;
+    let result  = await model.dramas.deleteOne({ dramaId });
+
+    console.log("刪除結果 :",result);
+    res.json({ message : "ok." });
+  }catch(err){
+    console.log(err);
+    res.status(500).json({ message : "Server 端發生錯誤！" });
+  };
+});
 
 module.exports = router;
