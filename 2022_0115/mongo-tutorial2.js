@@ -116,3 +116,34 @@ insertMain2();
 // console.log(conn.models);
 ///////
 
+
+///////////////////////////////////////////////////////////////
+// 補充
+// 1. body-parser 可直接用 express 
+// 2. mongodb 之 aggregation (聚合 , 分組 , 類似 RDB 的 groupby )
+//   1) 計算各個 category 的數量
+db.getCollection('dramas-table').aggregate([
+    { 
+        "$group" : { "_id" : "$category"  , "count" : { "$sum" : 1 }   }
+    }
+])
+
+//   2) 每個 category 中 , score 最高的資料
+db.getCollection('dramas-table').aggregate([
+    { 
+        "$group" : { 
+           "_id"       : "$category" , 
+           "count"     : {  "$sum" : 1 } , 
+           "max_score" : { "$first" : "$$ROOT" }   
+        }   
+    },
+    {
+        "$project" : {
+            "_id" : 1,
+            "count" : 1,
+            "max_score.dramaId" : 1,
+            "max_score.name" : 1,
+            "max_score.score" : 1
+        }
+    }
+])

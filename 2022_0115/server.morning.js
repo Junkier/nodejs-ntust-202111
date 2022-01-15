@@ -26,14 +26,22 @@ app.use( express.static( path.join( __dirname , "application") ));
 //////////////////////////////////////////
 
 //////////////////////////////////////////
-// 使用 body-parser 處理  Form data  (req.body)
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({
+// [新版] 可直接用 express 處理  Form data  (req.body)
+app.use(express.json());
+app.use(express.urlencoded({
   extended : false,   // 是否用 額外套件 解析字串
   limit : "1mb",      // 限制 參數資料大小
   parameterLimit : "10000" // 限制參數個數 
 }));
+
+// [舊版]
+// 使用 body-parser 處理  Form data  (req.body)
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended : false,   // 是否用 額外套件 解析字串
+//   limit : "1mb",      // 限制 參數資料大小
+//   parameterLimit : "10000" // 限制參數個數 
+// }));
 //////////////////////////////////////////
 
 //////////////////////////////////////////
