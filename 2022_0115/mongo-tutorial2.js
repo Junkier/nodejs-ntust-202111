@@ -68,9 +68,12 @@ let main = async () => {
 const membersSchema = new mongoose.Schema({
   "name" : String,
   "age"  : Number,
-  "math_score" : Number
+  "math_score" : Number,
+  // "testqq" : String
+  // "math_score" : String,
 },{
-  collection : "members"
+  collection : "members",
+  versionKey : false // 移除 __v 欄位
 }); 
 
 let membersModel = conn.model("Members" , membersSchema);
@@ -80,24 +83,36 @@ let findMain2 = async ()=>{
     // math_score >= 85
     // let data2 = await membersModel.find({ "math_score" : { "$gte" : 85 } }); // --> .find , 回傳 Array
     // let data2 = await membersModel.findOne({ "math_score" : { "$gte" : 85 } }); // --> .findOne , 回傳 Object
-    
-    // let data2 = await dramasModel.find({ "name" : "jeff" }); 
+
+    // 使用不同的 Model -> 操作資料庫不同的 collection
     let data2 = await membersModel.find({ "name" : "jeff" }); 
-
+    // let data2 = await dramasModel.find({ "score" : {"$gt" : 123 } }); 
     console.log(data2);
-
   } catch(err){
     console.log(err);
   }
 };
 
-findMain2();
+// findMain2();
 
-// let insertMain2 = async ()=>{
-//   try{
+let insertMain2 = async ()=>{
+  try{
+    // 正常情況
+    // let result = await membersModel.create({ name : "benson" , age : 47 , math_score:100 }); 
 
-//   } catch(err){
-//     console.log(err);
-//   }
-// };
-// insertMain2();
+    // 亂塞欄位
+    // let result = await membersModel.create({ name : "david" , eng_score: 100 , message : "嗨嗨～～～～" }); 
+
+    let result = await membersModel.create({ name : "Elle" , math_score: 100 , message : "嗨嗨～～～～" }); 
+    console.log("新增的資料 :",result);
+  } catch(err){
+    console.log(err);
+  }
+};
+insertMain2();
+
+///////
+// 查看 connection 上的 Model 物件
+// console.log(conn.models);
+///////
+
