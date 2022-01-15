@@ -53,6 +53,24 @@ router.post("/detail", async (req,res)=>{
 // 修改 影集資料
 // PUT /dramas/detail/:dramaId
 // payload : { name: ABCDE , score: 5 }
+router.put("/detail/:dramaId", async (req,res)=>{
+   try{
+     let dramaId = req.params.dramaId;
+     console.log( { dramaId } );  // 解構
+
+     let result = await model.dramas.updateOne(
+          { dramaId } , 
+          { "$set" : { name : req.body.name , score : req.body.score } }
+        );
+
+      console.log("修改結果 :" , result);
+      res.json({ message : "ok."});
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({ message : "Server 端發生錯誤！" });
+  };
+});
+
 
 // 刪除 影集資料
 // DELETE /dramas/detail/:dramaId 
