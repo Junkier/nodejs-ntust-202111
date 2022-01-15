@@ -19,7 +19,14 @@ router.get("/page/detail",
     }
 );
 
+////////////////////////////
 //// [Code] 以下開發 API
-
+// 完成下列開發
+// 1. 串接好 to-do-list 頁面
+// 2. MongoDB 新增好 to-do-list 資料
+// 3. 2組 API 之開發
+//   1) GET /to-do-list/list
+//   2) GET /to-do-list/detail/:to_do_id
+////////////////////////////
 
 module.exports = router;
