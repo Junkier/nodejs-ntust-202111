@@ -9,7 +9,8 @@ const dramaSchema = new mongoose.Schema({
   "name"     : String,
   "score"    : Number
 },{
-  collection : "dramas-table"  // 要操作的 collection (table) 名稱
+  collection : "dramas-table",  // 要操作的 collection (table) 名稱
+  versionKey : false
 });
 
 // 建立 Model 物件 (在 conn 連線上, 註冊一個物件)

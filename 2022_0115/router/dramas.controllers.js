@@ -27,8 +27,28 @@ router.get("/list", async (req,res)=>{
 
 
 // 新增 影集資料
-// POST /dramas/data 
+// POST /dramas/detail 
 // payload : {category: 犯罪 , name: ZZZZ , score: 2.5}
+router.post("/detail", async (req,res)=>{
+  try{
+    // 1. 取得最新的 dramaId 
+    let lastElement = await model.dramas.findOne({} , { dramaId : 1})
+                                        .sort({ dramaId : -1 }) // 透過 dramaId 大 -> 小 排序
+
+    let newestDramaId = Number(lastElement["dramaId"]) + 1;
+    req.body["dramaId"] = String(newestDramaId);  // 在 req.body 上 , 新增 dramaId
+    
+    // 2. 新增資料 -> model.drama.create()
+    let result = await model.dramas.create(req.body);
+    console.log("新增的資料 :" , result);
+
+    res.json({ message : "ok." }); 
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({ message : "Server 端發生錯誤！" });
+  };
+});
+
 
 // 修改 影集資料
 // PUT /dramas/detail/:dramaId
