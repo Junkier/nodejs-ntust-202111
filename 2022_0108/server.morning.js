@@ -17,10 +17,17 @@ const validator = require("./utils/validator");
 // 追加 redis 套件 (Node.js 使用)
 const redis = require("redis");
 const redisClient = redis.createClient();  // 產生 redisClient 的連線實例 (Instance)
+redisClient.connect().catch(console.error) // [2023/07/11 更新][1][新增 redisClient.connect 操作]
 
 // [Session 外存][2]
 // 追加 connect-redis 套件 (專門為 express 設計的對接套件)
-const redisStore = require("connect-redis")(session);
+
+// [2023/07/11 更新][2][此為舊版寫法]
+// const redisStore = require("connect-redis")(session);  // 會造成 TypeError: require(...) is not a function error
+
+// [新版寫法]
+const RedisStore = require("connect-redis").default;
+
 
 //////////////////////////////////////////
 // 設定模板引擎
@@ -46,7 +53,8 @@ app.use(bodyParser.urlencoded({
 // [Session][2] 設定 session middleware
 app.use(session({
   // [Session 外存][3] 設定好 redisStore 
-  store : new redisStore({ client : redisClient }), // session 資料存放的地方
+  // [2023/07/11 更新][3] 變數 redisStore 改為大寫的 RedisStore
+  store : new RedisStore({ client : redisClient }), // session 資料存放的地方
   secret : "abcd1234" ,  // session 資料加密使用
   resave : true,          // 不論修改 , 是否要回存到 store 上
   saveUninitialized : false, // 初始化的 session , 是否要存到 store 上
