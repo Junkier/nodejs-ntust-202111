@@ -52,11 +52,11 @@
         - package.json
         - api-docs  (API 文件 , 無須更動)
        
-    4) JWT 相關優質好文
+    3) JWT 相關優質好文
+       - [Node 實作 jwt 驗證 API](https://segmentfault.com/a/1190000005783306)
        - [阮一峰老師-JSON Web Token 入门教程](https://reurl.cc/RbaEre)
-       - [麥克的半路出家筆記-透過 JWT 實作驗證機制](https://reurl.cc/Q68GLp)
-    
-    3) 解答將於 **???** 公佈於 [mentorJe！傑夫尬程式](https://reurl.cc/kL6bLK) 的頻道上
+       
+    4) 解答公佈於 [宇先程式](https://www.youtube.com/watch?v=yvd2P3CcCbs) 的頻道上
 
 ---
 
